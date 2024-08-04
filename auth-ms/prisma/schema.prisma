@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiODQ2ZTdmZWMtMTRiMi00NmFlLWJhNmYtZDdiMTg1NGU3YTcwIiwidGVuYW50X2lkIjoiOWQ5MDM4NTAwMTU2YjY0YWU0YWQxZDYwMjhjYzE2ZjkzNmEwOWJhZGVkMWUyMjA1Y2FkMGVjZDkyMTFjOWI5MCIsImludGVybmFsX3NlY3JldCI6ImNhY2E0NjE3LTQ2YjItNGI1ZS1iNDI2LThjOGRhNTQ2NzZhYSJ9.XFKfH9Of3cWBKoJapJ86ekdTEep3mM77vi8o5wt4sK4"
+  directUrl = "postgresql://buyppy_ps_user:19kfH8gEOuhN0cYyhZ4ZyoFfFDNEoVc4@dpg-cqbhsdqju9rs7391lflg-a.oregon-postgres.render.com/buyppy_ps"
+}
+
+model Client {
+  id         String   @id
+  document   String   @unique
+  phone      String
+  email      String   @unique
+  name       String
+  password   String
+  address    Address  @relation(fields: [addressId], references: [id])
+  addressId  String   @unique
+  orders     Order[]
+  created_at DateTime
+
+  @@map("clients")
+}
+
+model Address {
+  id      String  @id
+  street  String
+  number  Int
+  zipCode String
+  client  Client?
+}
+
+model Product {
+  id               String         @id
+  code             String         @unique
+  name             String
+  category         String
+  price            Float
+  promotionalPrice Float?
+  stockQuantity    Int
+  orderProducts    OrderProduct[]
+
+  @@map("products")
+}
+
+model Order {
+  id            String         @id
+  client        Client         @relation(fields: [clientId], references: [id])
+  clientId      String
+  orderProducts OrderProduct[]
+  totalAmount   Float
+  notes         String?
+  discountCode  Coupon?        @relation(fields: [couponId], references: [id])
+  couponId      String?
+
+  @@map("orders")
+}
+
+model OrderProduct {
+  id        String  @id
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+
+  @@map("orders_products")
+}
+
+model Coupon {
+  id                 String   @id
+  code               String   @unique
+  discountPercentage Float
+  expirationDate     DateTime
+  usageLimit         Int
+  orders             Order[]
+
+  @@map("coupons")
+}
