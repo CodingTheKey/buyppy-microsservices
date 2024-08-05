@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import User from "../../../../domain/user/entity/user";
+import { Address } from "../../../../domain/user/value-object/address";
+import { prisma } from "../../../db/prisma/primsa";
 import type { ClientRepositoryInterface } from "./client-repository.interface";
 
 export class ClientRepository implements ClientRepositoryInterface {

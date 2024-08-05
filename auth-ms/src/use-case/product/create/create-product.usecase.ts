@@ -1,5 +1,5 @@
 import { ProductFactory } from "../../../domain/product/factory/product.factory";
-import type { ProductRepositoryInterface } from "../../../infra/product/prisma/product-repository.interface";
+import type { ProductRepositoryInterface } from "../../../infra/product/repository/prisma/product-repository.interface";
 import type { InputCreateProductDTO } from "./input-create-product.dto";
 
 export class CreateProductUseCase {

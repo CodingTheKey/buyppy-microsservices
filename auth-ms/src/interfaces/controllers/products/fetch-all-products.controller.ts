@@ -1,4 +1,4 @@
-import { ProductRepository } from "../../../infra/product/prisma/product.repository";
+import { ProductRepository } from "../../../infra/product/repository/prisma/product.repository";
 import { FetchAllProductsUseCase } from "../../../use-case/product/fetch/fetch-all-products.usecase";
 
 export class FetchAllProductsController {
