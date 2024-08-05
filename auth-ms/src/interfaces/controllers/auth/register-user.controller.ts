@@ -1,4 +1,4 @@
-import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../infra/client/repository/client/prisma/client.repository";
 import type { Context } from "../../../types";
 import type { RegisterClientDTO } from "../../../use-case/user/create/register-client.dto";
 import { RegisterUserUseCase } from "../../../use-case/user/create/register-client.usecase";
@@ -22,7 +22,7 @@ export class RegisterUserController {
 				},
 			};
 
-			const usercase = new RegisterUserUseCase(new UserRepository());
+			const usercase = new RegisterUserUseCase(new ClientRepository());
 			const result = await usercase.execute(registerClientDTO, c.env.JWT_SECRET);
 
 			return new Response(JSON.stringify(result));

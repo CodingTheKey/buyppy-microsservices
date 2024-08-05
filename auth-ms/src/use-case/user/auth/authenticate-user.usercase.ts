@@ -1,19 +1,19 @@
 import { sign } from "hono/jwt";
-import type { UserRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
+import type { ClientRepositoryInterface } from "../../../infra/client/repository/client/prisma/client-repository.interface";
 import { ComparePassword } from "../../../utils/compare-passwors";
 import type { AuthenticateUserDTO } from "./auth-user.dto";
 
 export class AuthenticateUser {
-	private userRepository: UserRepositoryInterface;
+	private clientRepository: ClientRepositoryInterface;
 
-	constructor(userRepository: UserRepositoryInterface) {
-		this.userRepository = userRepository;
+	constructor(userRepository: ClientRepositoryInterface) {
+		this.clientRepository = userRepository;
 	}
 
 	async execute(input: AuthenticateUserDTO, JWT_SECRET: string) {
 		const comparePassword = new ComparePassword();
 
-		const user = await this.userRepository.findByEmail(input.email);
+		const user = await this.clientRepository.findByEmail(input.email);
 
 		const isPasswordValid = await comparePassword.execute(
 			{ password: input.password, encrypted_password: user.password },

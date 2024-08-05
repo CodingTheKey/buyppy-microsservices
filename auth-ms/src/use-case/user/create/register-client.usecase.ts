@@ -2,14 +2,14 @@ import { sign } from "hono/jwt";
 import { v4 as uuid } from "uuid";
 import User from "../../../domain/user/entity/user";
 import { Address } from "../../../domain/user/value-object/address";
-import type { UserRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
+import type { ClientRepositoryInterface } from "../../../infra/client/repository/client/prisma/client-repository.interface";
 import { Hash } from "../../../utils/hash";
 import type { RegisterClientDTO } from "./register-client.dto";
 
 export class RegisterUserUseCase {
-	private userRepository: UserRepositoryInterface;
+	private userRepository: ClientRepositoryInterface;
 
-	constructor(userRepository: UserRepositoryInterface) {
+	constructor(userRepository: ClientRepositoryInterface) {
 		this.userRepository = userRepository;
 	}
 

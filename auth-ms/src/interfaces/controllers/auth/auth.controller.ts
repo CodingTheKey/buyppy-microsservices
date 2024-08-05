@@ -1,4 +1,4 @@
-import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../infra/client/repository/client/prisma/client.repository";
 import type { Context } from "../../../types";
 import type { AuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
 import { AuthenticateUser } from "../../../use-case/user/auth/authenticate-user.usercase";
@@ -9,7 +9,7 @@ export class AuthController {
 		try {
 			const { email, password } = await c.req.json<AuthenticateUserDTO>();
 
-			const authenticateUser = new AuthenticateUser(new UserRepository());
+			const authenticateUser = new AuthenticateUser(new ClientRepository());
 			const result = await authenticateUser.execute(
 				{ email, password },
 				c.env.JWT_SECRET,
