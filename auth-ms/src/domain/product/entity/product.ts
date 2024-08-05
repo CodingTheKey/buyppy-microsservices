@@ -1,7 +1,7 @@
 import { ProductValidatorFactory } from "../factory/product-validator.factory";
 
 export class Product {
-  private _id: number;
+  private _id: string;
   private _name: string;
   private _code: string;
   private _cost: number;
@@ -10,7 +10,7 @@ export class Product {
   private _category: string;
 
   constructor(
-    id: number,
+    id: string,
     name: string,
     code: string,
     cost: number,
@@ -33,7 +33,7 @@ export class Product {
 		ProductValidatorFactory.create().validate(this);
 	}
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
