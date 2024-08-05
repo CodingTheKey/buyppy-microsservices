@@ -1,4 +1,4 @@
-import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import { FetchUserByOrganizationUseCase } from "../../../use-case/user/fetchByOrganization/fetchByOrganization.usecase";
 import { UrlParamsToObject } from "../../../utils/url-params-to-object";
@@ -16,7 +16,7 @@ export class FetchByOrganizationController {
       const params = new URL(rawInput).searchParams
       const input = urlPramsUtil.execute(params)
 
-			const usecase = new FetchUserByOrganizationUseCase(new UserRepository());
+			const usecase = new FetchUserByOrganizationUseCase(new ClientRepository());
 			const result = await usecase.execute(input.organization_id);
 
 			return new Response(JSON.stringify(result));

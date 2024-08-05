@@ -1,4 +1,4 @@
-import { ClientRepository } from "../../../infra/client/repository/client/prisma/client.repository";
+import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import type { AuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
 import { AuthenticateUser } from "../../../use-case/user/auth/authenticate-user.usercase";

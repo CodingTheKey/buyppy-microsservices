@@ -1,5 +1,5 @@
 import { Product } from "../../../domain/product/entity/product";
-import type { ProductRepositoryInterface } from "../../../infra/client/repository/product/prisma/product-repository.interface";
+import type { ProductRepositoryInterface } from "../../../infra/product/prisma/product-repository.interface";
 
 export class FetchAllProductsUseCase {
   private productRepository: ProductRepositoryInterface

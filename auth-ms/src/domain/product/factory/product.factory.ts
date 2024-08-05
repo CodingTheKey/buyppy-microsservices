@@ -8,7 +8,7 @@ export class ProductFactory {
     code: string,
     coast: number,
     price: number,
-    promotionalPrice: number,
+    promotionalPrice: number | null,
     category: string
   ): Product {
     return new Product(
