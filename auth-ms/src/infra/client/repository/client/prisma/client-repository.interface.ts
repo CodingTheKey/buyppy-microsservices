@@ -3,4 +3,5 @@ import type User from "../../../../../domain/user/entity/user";
 
 export interface ClientRepositoryInterface extends RepositoryInterface<User> {
   fetchByOrganizationId(organization_id: string): Promise<User[]>
+  findByEmail(email: string): Promise<User>
 }
