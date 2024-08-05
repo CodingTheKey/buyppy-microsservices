@@ -1,10 +1,11 @@
-import { UserRepository } from "../../../infra/user/repository/prisma/user.repository";
+import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import type { AuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
 import { AuthenticateUser } from "../../../use-case/user/auth/authenticate-user.usercase";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AuthController {
-	async login(c: Context) {
+	static async execute(c: Context) {
 		try {
 			const { email, password } = await c.req.json<AuthenticateUserDTO>();
 

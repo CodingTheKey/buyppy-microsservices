@@ -1,4 +1,4 @@
-import { UserRepository } from "../../../infra/user/repository/prisma/user.repository";
+import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import { FetchUserByOrganizationUseCase } from "../../../use-case/user/fetchByOrganization/fetchByOrganization.usecase";
 import { UrlParamsToObject } from "../../../utils/url-params-to-object";

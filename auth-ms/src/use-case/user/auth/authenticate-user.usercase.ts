@@ -1,5 +1,5 @@
 import { sign } from "hono/jwt";
-import type { UserRepositoryInterface } from "../../../infra/user/repository/prisma/user-repository.interface";
+import type { UserRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
 import { ComparePassword } from "../../../utils/compare-passwors";
 import type { AuthenticateUserDTO } from "./auth-user.dto";
 

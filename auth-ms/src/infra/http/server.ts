@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
 
@@ -16,6 +17,8 @@ app.use(
 
 const registerUserController = new RegisterUserController();
 const FetchUsersController = new FetchByOrganizationController();
+
+app.post("/login", AuthController.execute);
 
 app.post("/register", registerUserController.register);
 app.get("/client/all", FetchUsersController.fetchByOrganization);

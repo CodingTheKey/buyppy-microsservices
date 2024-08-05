@@ -1,15 +1,15 @@
-import { UserRepository } from "../../../infra/user/repository/prisma/user.repository";
+import { UserRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
-import type { RegisterUserDTO } from "../../../use-case/user/create/register-user.dto";
-import { RegisterUserUseCase } from "../../../use-case/user/create/register-user.usecase";
+import type { RegisterClientDTO } from "../../../use-case/user/create/register-client.dto";
+import { RegisterUserUseCase } from "../../../use-case/user/create/register-client.usecase";
 
 export class RegisterUserController {
 	async register(c: Context) {
 		try {
-			const input = await c.req.json<RegisterUserDTO>();
+			const input = await c.req.json<RegisterClientDTO>();
 			console.log("🚀 ~ RegisterUserController ~ register ~ input:", input)
 
-			const RegisterUserDto: RegisterUserDTO = {
+			const registerClientDTO: RegisterClientDTO = {
 				email: input.email,
 				name: input.name,
 				password: input.password,
@@ -23,7 +23,7 @@ export class RegisterUserController {
 			};
 
 			const usercase = new RegisterUserUseCase(new UserRepository());
-			const result = await usercase.execute(RegisterUserDto, c.env.JWT_SECRET);
+			const result = await usercase.execute(registerClientDTO, c.env.JWT_SECRET);
 
 			return new Response(JSON.stringify(result));
 		// biome-ignore lint/suspicious/noExplicitAny: <error must be of type any in all cases>

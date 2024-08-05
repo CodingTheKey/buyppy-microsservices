@@ -2,9 +2,9 @@ import { sign } from "hono/jwt";
 import { v4 as uuid } from "uuid";
 import User from "../../../domain/user/entity/user";
 import { Address } from "../../../domain/user/value-object/address";
-import type { UserRepositoryInterface } from "../../../infra/user/repository/prisma/user-repository.interface";
+import type { UserRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
 import { Hash } from "../../../utils/hash";
-import type { RegisterUserDTO } from "./register-user.dto";
+import type { RegisterClientDTO } from "./register-client.dto";
 
 export class RegisterUserUseCase {
 	private userRepository: UserRepositoryInterface;
@@ -13,7 +13,7 @@ export class RegisterUserUseCase {
 		this.userRepository = userRepository;
 	}
 
-	async execute(input: RegisterUserDTO, JWT_SECRET: string) {
+	async execute(input: RegisterClientDTO, JWT_SECRET: string) {
 		const hash = new Hash();
 
 		const address = new Address(

@@ -1,4 +1,4 @@
-export type RegisterUserDTO = {
+export type RegisterClientDTO = {
 	document: string;
 	phone: string;
 	email: string;

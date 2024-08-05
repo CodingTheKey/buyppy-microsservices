@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import User from "../../../../domain/user/entity/user";
-import { Address } from "../../../../domain/user/value-object/address";
-import { prisma } from "../../../db/prisma/primsa";
-import type { UserRepositoryInterface } from "./user-repository.interface";
+import User from "../../../../../domain/user/entity/user";
+import { Address } from "../../../../../domain/user/value-object/address";
+import { prisma } from "../../../../db/prisma/primsa";
+import type { UserRepositoryInterface } from "./client-repository.interface";
 
 export class UserRepository implements UserRepositoryInterface {
 	async fetchByOrganizationId(organization_id: string): Promise<User[]> {

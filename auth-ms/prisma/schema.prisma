@@ -15,72 +15,70 @@ datasource db {
 }
 
 model Client {
-  id         String   @id
-  document   String   @unique
-  phone      String
-  email      String   @unique
-  name       String
-  password   String
+  id         String   @id @default(uuid()) @map("id")
+  document   String   @unique @map("document")
+  phone      String   @map("phone")
+  email      String   @unique @map("email")
+  name       String   @map("name")
+  password   String   @map("password")
+  addressId  String   @unique @map("address_id")
   address    Address  @relation(fields: [addressId], references: [id])
-  addressId  String   @unique
-  orders     Order[]
-  created_at DateTime
+  created_at DateTime @map("created_at")
 
   @@map("clients")
 }
 
 model Address {
-  id      String  @id
-  street  String
-  number  Int
-  zipCode String
+  id      String  @id @default(uuid()) @map("id")
+  street  String  @map("street")
+  number  Int     @map("number")
+  zipCode String  @map("zip_code")
   client  Client?
+
+  @@map("address")
+}
+
+model Coupon {
+  id                 String   @id @default(uuid()) @map("id")
+  code               String   @unique @map("code")
+  discountPercentage Float    @map("discount_percentage")
+  expirationDate     DateTime @map("expiration_date")
+  usageLimit         Int      @map("usage_limit")
+
+  @@map("coupons")
 }
 
 model Product {
-  id               String         @id
-  code             String         @unique
-  name             String
-  category         String
-  price            Float
-  promotionalPrice Float?
-  stockQuantity    Int
-  orderProducts    OrderProduct[]
+  id               String             @id @default(uuid()) @map("id")
+  name             String             @map("name")
+  code             String             @unique @map("code")
+  cost             Float              @map("cost")
+  price            Float              @map("price")
+  promotionalPrice Float?             @map("promotional_price")
+  category         String             @map("category")
+  inventories      Inventory[]
+  attributes       ProductAttribute[]
 
   @@map("products")
 }
 
-model Order {
-  id            String         @id
-  client        Client         @relation(fields: [clientId], references: [id])
-  clientId      String
-  orderProducts OrderProduct[]
-  totalAmount   Float
-  notes         String?
-  discountCode  Coupon?        @relation(fields: [couponId], references: [id])
-  couponId      String?
-
-  @@map("orders")
-}
-
-model OrderProduct {
-  id        String  @id
-  order     Order   @relation(fields: [orderId], references: [id])
-  orderId   String
+model ProductAttribute {
+  id        String  @id @default(uuid()) @map("id")
+  productId String  @map("product_id")
+  key       String  @map("key")
+  value     String  @map("value")
   product   Product @relation(fields: [productId], references: [id])
-  productId String
-  quantity  Int
 
-  @@map("orders_products")
+  @@map("product_attributes")
 }
 
-model Coupon {
-  id                 String   @id
-  code               String   @unique
-  discountPercentage Float
-  expirationDate     DateTime
-  usageLimit         Int
-  orders             Order[]
+model Inventory {
+  id        String  @id @default(uuid()) @map("id")
+  productId String  @map("product_id")
+  quantity  Int     @map("quantity")
+  location  String? @map("location")
 
-  @@map("coupons")
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("inventories")
 }
