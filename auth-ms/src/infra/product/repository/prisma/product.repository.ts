@@ -20,7 +20,20 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 	}
 	async update(entity: Product): Promise<void> {
-		throw new Error("Method not implemented.");
+		prisma.product.update({
+			data: {
+				id: entity.id,
+				category: entity.category,
+				code: entity.code,
+				cost: entity.cost,
+				name: entity.name,
+				price: entity.price,
+				promotionalPrice: entity.promotionalPrice
+			},
+			where: {
+				id: entity.id
+			}
+		})
 	}
 	async find(id: string): Promise<Product> {
 		throw new Error("Method not implemented.");
