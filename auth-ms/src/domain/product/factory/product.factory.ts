@@ -6,7 +6,7 @@ export class ProductFactory {
   public static create(
     name: string,
     code: string,
-    coast: number,
+    cost: number,
     price: number,
     promotionalPrice: number | null,
     category: string
@@ -15,7 +15,7 @@ export class ProductFactory {
       uuid(),
       name,
       code,
-      coast,
+      cost,
       price,
       promotionalPrice,
       category

@@ -1,4 +1,5 @@
 import type { Product } from "../../../../domain/product/entity/product";
+import { ProductFactory } from "../../../../domain/product/factory/product.factory";
 import { prisma } from "../../../db/prisma/primsa";
 import type { ProductRepositoryInterface } from "./product-repository.interface";
 
@@ -20,7 +21,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 	}
 	async update(entity: Product): Promise<void> {
-		prisma.product.update({
+		await prisma.product.update({
 			data: {
 				id: entity.id,
 				category: entity.category,
@@ -36,6 +37,21 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 	}
 	async find(id: string): Promise<Product> {
-		throw new Error("Method not implemented.");
+		const model = await prisma.product.findFirst({
+			where: {
+				id
+			}
+		})
+
+		const product = ProductFactory.create(
+			model?.name ?? '',
+			model?.code ?? '',
+			model?.cost ?? 0,
+			model?.price ?? 0,
+			model?.promotionalPrice ?? 0,
+			model?.category ?? ''
+		)
+
+		return product
 	}
 }
