@@ -18,5 +18,9 @@ export class CreateProductUseCase {
       input.promotionalPrice,
       input.category
     )
+
+    await this.productRepository.create(product)
+
+    return product
   }
 }
