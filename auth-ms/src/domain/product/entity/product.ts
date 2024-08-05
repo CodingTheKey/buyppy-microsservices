@@ -33,7 +33,6 @@ export class Product {
 		ProductValidatorFactory.create().validate(this);
 	}
 
-
   get id(): number {
     return this._id;
   }
