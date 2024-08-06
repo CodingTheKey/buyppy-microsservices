@@ -4,6 +4,7 @@ export type RegisterClientDTO = {
 	email: string;
 	name: string;
 	password: string;
+	observations: string;
 	address: {
 		street: string;
 		number: number;

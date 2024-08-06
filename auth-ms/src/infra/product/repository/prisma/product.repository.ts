@@ -1,14 +1,26 @@
-import type { Product } from "../../../../domain/product/entity/product";
+import { Product } from "../../../../domain/product/entity/product";
 import { ProductFactory } from "../../../../domain/product/factory/product.factory";
 import { prisma } from "../../../db/prisma/primsa";
 import type { ProductRepositoryInterface } from "./product-repository.interface";
 
 export class ProductRepository implements ProductRepositoryInterface {
 	async findAll(): Promise<Product[]> {
-		throw new Error("Method not implemented.");
+		const model = await prisma.product.findMany()
+
+		const products = model.map((p) => new Product(
+			p.id,
+			p.name,
+			p.code,
+			p.cost,
+			p.price,
+			p.promotionalPrice,
+			p.category
+		))
+
+		return products
 	}
 	async create(entity: Product): Promise<void> {
-		const product = prisma.product.create({
+		await prisma.product.create({
 			data: {
 				id: entity.id,
 				category: entity.category,

@@ -1,14 +1,14 @@
 import { z } from "zod";
 import type ValidatorInterface from "../../@shared/entity/validator/validator.interface";
-import { User } from "../entity/User";
+import type User from "../entity/client";
 
-export class UserZodValidator implements ValidatorInterface<User> {
+export class ClientZodValidator implements ValidatorInterface<User> {
 	validate(entity: User) {
 		const userSchema = z.object({
-			id: z.string(),
+			document: z.string(),
+			phone: z.string(),
 			email: z.string(),
-			password: z.string(),
-			name: z.string(),
+			name: z.string()
 		});
 
 		userSchema.parse(entity);

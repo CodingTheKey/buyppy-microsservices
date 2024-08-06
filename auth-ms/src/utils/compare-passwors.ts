@@ -1,16 +1,18 @@
-import { Hash } from "./hash";
+import { compare } from "bcryptjs";
 
 export class ComparePassword {
 	async execute(
-		request: {
+		input: {
 			password: string;
 			encrypted_password: string;
 		},
-		JWT_SECRET: string,
 	) {
-		const hash = new Hash();
-		const hashedPassword = await hash.execute(request.password, JWT_SECRET);
+		const isValid = await compare(input.password, input.encrypted_password)
 
-		return hashedPassword === request.encrypted_password;
+		if (!isValid) {
+			throw new Error("Email ou senha incorretos");
+		}
+
+		return isValid
 	}
 }

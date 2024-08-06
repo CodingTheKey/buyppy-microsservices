@@ -14,71 +14,104 @@ datasource db {
   directUrl = "postgresql://buyppy_ps_user:19kfH8gEOuhN0cYyhZ4ZyoFfFDNEoVc4@dpg-cqbhsdqju9rs7391lflg-a.oregon-postgres.render.com/buyppy_ps"
 }
 
+model User {
+  id       String @id @default(uuid())
+  email    String
+  password String
+  name     String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("users")
+}
+
 model Client {
-  id         String   @id @default(uuid()) @map("id")
-  document   String   @unique @map("document")
-  phone      String   @map("phone")
-  email      String   @unique @map("email")
-  name       String   @map("name")
-  password   String   @map("password")
-  addressId  String   @unique @map("address_id")
-  address    Address  @relation(fields: [addressId], references: [id])
-  created_at DateTime @map("created_at")
+  id        String  @id @default(uuid())
+  document  String
+  phone     String
+  email     String  @unique
+  name      String
+  addressId String  @unique @map("address_id")
+  address   Address @relation(fields: [addressId], references: [id])
+
+  observations String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   @@map("clients")
 }
 
 model Address {
-  id      String  @id @default(uuid()) @map("id")
-  street  String  @map("street")
-  number  Int     @map("number")
+  id      String  @id @default(uuid())
+  street  String
+  number  Int
   zipCode String  @map("zip_code")
   client  Client?
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   @@map("address")
 }
 
 model Coupon {
-  id                 String   @id @default(uuid()) @map("id")
-  code               String   @unique @map("code")
+  id                 String   @id @default(uuid())
+  code               String   @unique
   discountPercentage Float    @map("discount_percentage")
   expirationDate     DateTime @map("expiration_date")
   usageLimit         Int      @map("usage_limit")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   @@map("coupons")
 }
 
 model Product {
-  id               String             @id @default(uuid()) @map("id")
-  name             String             @map("name")
-  code             String             @unique @map("code")
-  cost             Float              @map("cost")
-  price            Float              @map("price")
+  id               String             @id @default(uuid())
+  name             String
+  code             String             @unique
+  cost             Float
+  price            Float
   promotionalPrice Float?             @map("promotional_price")
-  category         String             @map("category")
+  category         String
   inventories      Inventory[]
   attributes       ProductAttribute[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   @@map("products")
 }
 
 model ProductAttribute {
-  id        String  @id @default(uuid()) @map("id")
+  id        String  @id @default(uuid())
   productId String  @map("product_id")
-  key       String  @map("key")
-  value     String  @map("value")
+  key       String
+  value     String
   product   Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("product_attributes")
 }
 
 model Inventory {
-  id        String  @id @default(uuid()) @map("id")
+  id        String  @id @default(uuid())
   productId String  @map("product_id")
-  quantity  Int     @map("quantity")
-  location  String? @map("location")
+  quantity  Int
+  location  String?
 
   product Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("inventories")
 }

@@ -1,4 +1,5 @@
 import { Product } from "../../../domain/product/entity/product";
+import { ProductMapper } from "../../../domain/product/mapper";
 import type { ProductRepositoryInterface } from "../../../infra/product/repository/prisma/product-repository.interface";
 
 export class FetchAllProductsUseCase {
@@ -21,6 +22,8 @@ export class FetchAllProductsUseCase {
       p.category
     ))
 
-    return products
+    const raw = products.map((p) => ProductMapper.execute(p))
+
+    return raw
   }
 }

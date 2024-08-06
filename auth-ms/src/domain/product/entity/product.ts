@@ -9,6 +9,10 @@ export class Product {
   private _promotionalPrice: number | null;
   private _category: string;
 
+  private _createAt: string | null;
+  private _updatedAt: string | null;
+  private _deletedAt: string | null;
+
   constructor(
     id: string,
     name: string,
@@ -16,7 +20,11 @@ export class Product {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    category: string
+    category: string,
+
+    createAt: string | null = null,
+    updatedAt: string | null = null,
+    deletedAt: string | null = null
   ) {
     this._id = id;
     this._name = name;
@@ -25,6 +33,10 @@ export class Product {
     this._price = price;
     this._promotionalPrice = promotionalPrice;
     this._category = category;
+
+    this._createAt = createAt
+    this._updatedAt = updatedAt
+    this._deletedAt = deletedAt
 
     this.validate()
   }

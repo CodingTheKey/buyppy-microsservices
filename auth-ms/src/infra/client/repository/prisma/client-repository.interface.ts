@@ -1,7 +1,8 @@
-import type { RepositoryInterface } from "../../../../../domain/@shared/entity/repository/repository-interface";
-import type User from "../../../../../domain/user/entity/user";
+import type { RepositoryInterface } from "../../../../domain/@shared/entity/repository/repository-interface"
+import type Client from "../../../../domain/client/entity/client"
 
-export interface ClientRepositoryInterface extends RepositoryInterface<User> {
-  fetchByOrganizationId(organization_id: string): Promise<User[]>
-  findByEmail(email: string): Promise<User>
+
+export interface ClientRepositoryInterface extends RepositoryInterface<Client> {
+  fetchByOrganizationId(organization_id: string): Promise<Client[]>
+  findByEmail(email: string): Promise<Client>
 }

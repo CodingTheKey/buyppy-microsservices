@@ -2,13 +2,13 @@ import { Entity } from "../../@shared/entity/entity-abstract";
 import { UserValidatorFactory } from "../factory/user-validator.factory";
 import type { Address } from "../value-object/address";
 
-export default class User extends Entity {
+export default class Client extends Entity {
 	private _document: string;
 	private _phone: string;
 	private _email: string;
 	private _name: string;
-	private _password: string
 	private _createdAt: Date
+	private _observations: string
 
 	private _address: Address
 
@@ -18,8 +18,9 @@ export default class User extends Entity {
 		phone: string,
 		email: string,
 		name: string,
-		password: string,
 		created_at: Date,
+
+		observations: string,
 
 		address: Address
 	) {
@@ -29,8 +30,9 @@ export default class User extends Entity {
 		this._phone = phone;
 		this._name = name;
 		this._email = email;
-		this._password = password
 		this._createdAt = created_at
+
+		this._observations = observations
 
 		this._address = address
 
@@ -46,15 +48,11 @@ export default class User extends Entity {
 	}
 
 	get email(): string {
-		return this._name
+		return this._email
 	}
 
 	get name(): string {
 		return this._name
-	}
-
-	get password(): string {
-		return this._password
 	}
 
 	get address(): Address {
@@ -63,5 +61,9 @@ export default class User extends Entity {
 
 	get phone(): string {
 		return this._phone
+	}
+
+	get observations(): string {
+		return this._observations
 	}
 }

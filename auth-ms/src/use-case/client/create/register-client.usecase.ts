@@ -1,9 +1,8 @@
-import { sign } from "hono/jwt";
 import { v4 as uuid } from "uuid";
-import User from "../../../domain/user/entity/user";
-import { Address } from "../../../domain/user/value-object/address";
+import Client from "../../../domain/client/entity/client";
+import { UserMapper } from "../../../domain/client/mapper";
+import { Address } from "../../../domain/client/value-object/address";
 import type { ClientRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
-import { Hash } from "../../../utils/hash";
 import type { RegisterClientDTO } from "./register-client.dto";
 
 export class RegisterUserUseCase {
@@ -14,8 +13,6 @@ export class RegisterUserUseCase {
 	}
 
 	async execute(input: RegisterClientDTO, JWT_SECRET: string) {
-		const hash = new Hash();
-
 		const address = new Address(
 			uuid(),
 			input.address.street,
@@ -23,26 +20,20 @@ export class RegisterUserUseCase {
 			input.address.zip_code,
 		);
 		
-		const hashedPassword = await hash.execute(input.password, JWT_SECRET);
-		const user = new User(
+		const user = new Client(
 			uuid(),
 			input.document,
 			input.phone,
 			input.email,
 			input.name,
-			hashedPassword,
 			new Date(),
+			input.observations,
 
 			address,
 		);
 
 		await this.clientRepository.create(user);
 
-		const token = sign(
-			{ id: user.id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
-			"your_jwt_secret",
-			"HS256",
-		);
-		return { user, token };
+		return UserMapper.execute(user)
 	}
 }

@@ -1,23 +1,25 @@
+import { hash } from "bcryptjs";
 import { sign } from "hono/jwt";
-import type { ClientRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface";
+import { UserRepositoryInterface } from "../../../infra/user/repository/prisma/user-repository.interface";
 import { ComparePassword } from "../../../utils/compare-passwors";
-import type { AuthenticateUserDTO } from "./auth-user.dto";
+import { UserMapper } from "../mapper/auth.mapper";
+import type { InputAuthenticateUserDTO } from "./auth-user.dto";
 
-export class AuthenticateUser {
-	private clientRepository: ClientRepositoryInterface;
+export class AuthenticateUserUseCase {
+	private userRepository: UserRepositoryInterface;
 
-	constructor(userRepository: ClientRepositoryInterface) {
-		this.clientRepository = userRepository;
+	constructor(userRepository: UserRepositoryInterface) {
+		this.userRepository = userRepository;
 	}
 
-	async execute(input: AuthenticateUserDTO, JWT_SECRET: string) {
+	async execute(input: InputAuthenticateUserDTO) {
 		const comparePassword = new ComparePassword();
+		console.log(await hash(input.password, 1))
 
-		const user = await this.clientRepository.findByEmail(input.email);
+		const user = await this.userRepository.findByEmail(input.email);
 
 		const isPasswordValid = await comparePassword.execute(
 			{ password: input.password, encrypted_password: user.password },
-			JWT_SECRET,
 		);
 
 		if (!user || !isPasswordValid) {
@@ -29,6 +31,7 @@ export class AuthenticateUser {
 			"your_jwt_secret",
 			"HS256",
 		);
-		return { user, token };
+
+		return { data: UserMapper.execute(user), token };
 	}
 }

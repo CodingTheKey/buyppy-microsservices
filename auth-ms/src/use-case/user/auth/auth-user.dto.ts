@@ -1,4 +1,4 @@
-export type AuthenticateUserDTO = {
+export type InputAuthenticateUserDTO = {
 	email: string;
 	password: string;
 };

@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import User from "../../../../domain/user/entity/user";
-import { Address } from "../../../../domain/user/value-object/address";
+import Client from "../../../../domain/client/entity/client";
+import { Address } from "../../../../domain/client/value-object/address";
 import { prisma } from "../../../db/prisma/primsa";
 import type { ClientRepositoryInterface } from "./client-repository.interface";
 
 export class ClientRepository implements ClientRepositoryInterface {
-	async fetchByOrganizationId(organization_id: string): Promise<User[]> {
+	async fetchByOrganizationId(organization_id: string): Promise<Client[]> {
 		const users = await prisma.client.findMany({
 			include: {
 				address: true,
@@ -24,14 +24,14 @@ export class ClientRepository implements ClientRepositoryInterface {
 				user.address.zipCode,
 			);
 
-			const userEntity = new User(
+			const userEntity = new Client(
 				user.id,
 				user.document,
 				user.phone,
 				user.email,
 				user.name,
-				user.password,
 				new Date(),
+				user.observations,
 
 				address,
 			);
@@ -41,7 +41,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 
 		return result
 	}
-	async findByEmail(email: string): Promise<User> {
+	async findByEmail(email: string): Promise<Client> {
 		const user = await prisma.client.findFirst({
 			where: {
 				email,
@@ -62,14 +62,15 @@ export class ClientRepository implements ClientRepositoryInterface {
 			user.address.zipCode,
 		);
 
-		const userEntity = new User(
+		const userEntity = new Client(
 			user.id,
 			user.document,
 			user.phone,
 			user.email,
 			user.name,
-			user.password,
 			new Date(),
+
+			user.observations,
 
 			address,
 		);
@@ -77,8 +78,8 @@ export class ClientRepository implements ClientRepositoryInterface {
 		return userEntity;
 	}
 
-	async create(entity: User): Promise<void> {
-		let userVerifier!: User;
+	async create(entity: Client): Promise<void> {
+		let userVerifier!: Client;
 		try {
 			userVerifier = await this.findByEmail(entity.email);
 		} catch (err) {}
@@ -101,21 +102,21 @@ export class ClientRepository implements ClientRepositoryInterface {
 				document: entity.document,
 				email: entity.email,
 				name: entity.name,
-				password: entity.password,
 				addressId: address.id,
-				created_at: new Date(),
+				createdAt: new Date(),
 				phone: entity.phone,
+				observations: entity.observations
 			},
 		});
 	}
 
-	update(entity: User): Promise<void> {
+	update(entity: Client): Promise<void> {
 		throw new Error("Method not implemented.");
 	}
-	find(id: string): Promise<User> {
+	find(id: string): Promise<Client> {
 		throw new Error("Method not implemented.");
 	}
-	findAll(): Promise<User[]> {
+	findAll(): Promise<Client[]> {
 		throw new Error("Method not implemented.");
 	}
 }

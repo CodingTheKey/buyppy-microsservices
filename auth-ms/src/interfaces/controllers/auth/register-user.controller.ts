@@ -1,13 +1,12 @@
 import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
-import type { RegisterClientDTO } from "../../../use-case/user/create/register-client.dto";
-import { RegisterUserUseCase } from "../../../use-case/user/create/register-client.usecase";
+import type { RegisterClientDTO } from "../../../use-case/client/create/register-client.dto";
+import { RegisterUserUseCase } from "../../../use-case/client/create/register-client.usecase";
 
 export class RegisterUserController {
 	async register(c: Context) {
 		try {
 			const input = await c.req.json<RegisterClientDTO>();
-			console.log("🚀 ~ RegisterUserController ~ register ~ input:", input)
 
 			const registerClientDTO: RegisterClientDTO = {
 				email: input.email,
@@ -15,6 +14,7 @@ export class RegisterUserController {
 				password: input.password,
 				document: input.document,
 				phone: input.phone,
+				observations: input.observations,
 				address: {
 					street: input.address.street,
 					number: input.address.number,
@@ -22,10 +22,16 @@ export class RegisterUserController {
 				},
 			};
 
+			console.log(registerClientDTO)
+
 			const usercase = new RegisterUserUseCase(new ClientRepository());
 			const result = await usercase.execute(registerClientDTO, c.env.JWT_SECRET);
 
-			return new Response(JSON.stringify(result));
+			const response = {
+				data: result,
+			}
+
+			return c.newResponse(JSON.stringify(response), 201);
 		// biome-ignore lint/suspicious/noExplicitAny: <error must be of type any in all cases>
 		} catch (err: any) {
 			console.error(err);

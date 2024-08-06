@@ -1,26 +1,32 @@
-import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
+import { HTTPException } from "hono/http-exception";
+import { UserRepository } from "../../../infra/user/repository/prisma/user.repository";
 import type { Context } from "../../../types";
-import type { AuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
-import { AuthenticateUser } from "../../../use-case/user/auth/authenticate-user.usercase";
+import type { InputAuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
+import { AuthenticateUserUseCase } from "../../../use-case/user/auth/authenticate-user.usercase";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AuthController {
 	static async execute(c: Context) {
 		try {
-			const { email, password } = await c.req.json<AuthenticateUserDTO>();
+			const input = await c.req.json<InputAuthenticateUserDTO>();
 
-			const authenticateUser = new AuthenticateUser(new ClientRepository());
-			const result = await authenticateUser.execute(
-				{ email, password },
-				c.env.JWT_SECRET,
-			);
+			const loginDTO: InputAuthenticateUserDTO = {
+				email: input.email,
+				password: input.password,
+			}; 
 
-			return new Response(JSON.stringify(result));
+			const usecase = new AuthenticateUserUseCase(new UserRepository());
+			const result = await usecase.execute(loginDTO);
+
+			return c.newResponse(JSON.stringify(result), 200);
 		// biome-ignore lint/suspicious/noExplicitAny: <error must be of type any in all cases>
-		} catch (err: any) {
-			console.error(err);
-			return new Response(JSON.stringify({ message: err.message }), {
-				status: 400,
+		} catch (e: any) {
+			console.error(e);
+			throw new HTTPException(400, {
+				message: JSON.stringify({
+					message: e.message,
+					error: e.message
+				})
 			});
 		}
 	}
