@@ -1,4 +1,4 @@
-import { User } from "../../../domain/user/entity/User";
+import type { User } from "../../../domain/user/entity/User";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class UserMapper {

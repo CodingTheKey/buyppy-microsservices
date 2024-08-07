@@ -21,6 +21,8 @@ export class UpdateProductUseCase {
       input.category ?? oldProduct.category
     )
 
-    this.productRepository.update(product)
+    console.log(product)
+
+    await this.productRepository.update(product)
   }
 }
