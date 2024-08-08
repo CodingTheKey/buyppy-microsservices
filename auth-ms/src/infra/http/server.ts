@@ -5,6 +5,7 @@ import { RegisterUserController } from "../../interfaces/controllers/auth/regist
 import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
 import { FetchAllProductsController } from "../../interfaces/controllers/products/fetch-all-products.controller";
+import { FetchProductByIdController } from "../../interfaces/controllers/products/fetch-product-by-id.controller";
 import { UpdateProductController } from "../../interfaces/controllers/products/update-product.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
 
@@ -31,6 +32,7 @@ app.get("/product/all", FetchAllProductsController.fetchAll)
 app.post("product/create", CreateProductController.execute)
 app.put("/product/:id", UpdateProductController.execute)
 app.delete("/product/:id", DeleteProductController.execute)
+app.get("/product/:id", FetchProductByIdController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

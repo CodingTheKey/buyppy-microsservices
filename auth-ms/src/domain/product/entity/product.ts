@@ -9,9 +9,9 @@ export class Product {
   private _promotionalPrice: number | null;
   private _category: string;
 
-  private _createAt: string | null;
-  private _updatedAt: string | null;
-  private _deletedAt: string | null;
+  private _createdAt: Date | null;
+  private _updatedAt: Date | null;
+  private _deletedAt: Date | null;
 
   constructor(
     id: string,
@@ -22,9 +22,9 @@ export class Product {
     promotionalPrice: number | null,
     category: string,
 
-    createAt: string | null = null,
-    updatedAt: string | null = null,
-    deletedAt: string | null = null
+    createAt: Date | null = null,
+    updatedAt: Date | null = null,
+    deletedAt: Date | null = null
   ) {
     this._id = id;
     this._name = name;
@@ -34,7 +34,7 @@ export class Product {
     this._promotionalPrice = promotionalPrice;
     this._category = category;
 
-    this._createAt = createAt
+    this._createdAt = createAt
     this._updatedAt = updatedAt
     this._deletedAt = deletedAt
 
@@ -71,5 +71,17 @@ export class Product {
 
   get category(): string {
     return this._category;
+  }
+
+  get createdAt(): Date | null {
+    return this._createdAt
+  }
+
+  get updatedAt(): Date | null {
+    return this._updatedAt
+  }
+
+  get deletedAt(): Date | null {
+    return this._deletedAt
   }
 }

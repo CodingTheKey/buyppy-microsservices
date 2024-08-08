@@ -12,7 +12,11 @@ export class ProductMapper {
       price: entity.price,
       promotionalPrice: entity.promotionalPrice,
       stockQuantity: 10,
-      attribute: "attribute"
+      attribute: "attribute",
+
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      deletedAt: entity.deletedAt
     }
   }
 }

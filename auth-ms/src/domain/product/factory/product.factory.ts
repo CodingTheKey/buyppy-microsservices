@@ -9,7 +9,11 @@ export class ProductFactory {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    category: string
+    category: string,
+
+    createdAt: Date | null = null,
+    updatedAt: Date | null = null,
+    deletedAt: Date | null = null
   ): Product {
     return new Product(
       uuid(),
@@ -18,7 +22,11 @@ export class ProductFactory {
       cost,
       price,
       promotionalPrice,
-      category
+      category,
+
+      createdAt,
+      updatedAt,
+      deletedAt
     )
   }
 }

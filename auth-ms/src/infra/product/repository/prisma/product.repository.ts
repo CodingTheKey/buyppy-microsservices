@@ -19,6 +19,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 
 		return products
 	}
+
 	async create(entity: Product): Promise<void> {
 		await prisma.product.create({
 			data: {
@@ -32,6 +33,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			}
 		})
 	}
+
 	async update(entity: Product): Promise<void> {
 		await prisma.product.update({
 			data: {
@@ -48,6 +50,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			}
 		})
 	}
+
 	async find(id: string): Promise<Product> {
 		const model = await prisma.product.findFirst({
 			where: {
@@ -55,13 +58,19 @@ export class ProductRepository implements ProductRepositoryInterface {
 			}
 		})
 
+		if (!model) throw new Error("Product not found")
+
 		const product = ProductFactory.create(
-			model?.name ?? '',
-			model?.code ?? '',
-			model?.cost ?? 0,
-			model?.price ?? 0,
-			model?.promotionalPrice ?? 0,
-			model?.category ?? ''
+			model.name,
+			model.code,
+			model.cost,
+			model.price,
+			model.promotionalPrice,
+			model.category,
+
+			model.createdAt,
+			model.updatedAt,
+			model.deletedAt
 		)
 
 		return product
