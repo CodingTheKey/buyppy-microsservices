@@ -114,16 +114,24 @@ export class ClientRepository implements ClientRepositoryInterface {
 		throw new Error("Method not implemented.");
 	}
 
-	async update(entity: Product): Promise<void> {
-		await prisma.product.update({
+	async update(entity: Client): Promise<void> {
+		const now = new Date()
+		await prisma.client.update({
 			data: {
-				id: entity.id,
-				category: entity.category,
-				code: entity.code,
-				cost: entity.cost,
+				updatedAt: now,
+				document: entity.document,
+				email: entity.email,
 				name: entity.name,
-				price: entity.price,
-				promotionalPrice: entity.promotionalPrice
+				observations: entity.observations,
+				phone: entity.phone,
+				address: {
+					update: {
+						number: entity.address.number,
+						street: entity.address.street,
+						zipCode: entity.address.zipCode,
+						updatedAt: now
+					}
+				}
 			},
 			where: {
 				id: entity.id
