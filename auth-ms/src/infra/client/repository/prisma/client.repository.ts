@@ -165,8 +165,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 	}
 
 	async delete(id: string): Promise<void> {
-		console.log(id)
-		await prisma.product.delete({
+		await prisma.client.delete({
 			where: {
 				id
 			}
