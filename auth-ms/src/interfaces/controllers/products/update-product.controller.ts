@@ -15,6 +15,7 @@ export class UpdateProductController {
       const output = await usecase.execute(id, input)
 
       return c.newResponse(JSON.stringify(output), 200)
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (e: any) {
       throw new HTTPException(500, {
         message: e.message
