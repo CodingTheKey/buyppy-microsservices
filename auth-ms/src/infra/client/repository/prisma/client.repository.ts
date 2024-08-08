@@ -110,13 +110,47 @@ export class ClientRepository implements ClientRepositoryInterface {
 		});
 	}
 
-	update(entity: Client): Promise<void> {
-		throw new Error("Method not implemented.");
-	}
-	find(id: string): Promise<Client> {
-		throw new Error("Method not implemented.");
-	}
 	findAll(): Promise<Client[]> {
 		throw new Error("Method not implemented.");
+	}
+
+	async update(entity: Product): Promise<void> {
+		await prisma.product.update({
+			data: {
+				id: entity.id,
+				category: entity.category,
+				code: entity.code,
+				cost: entity.cost,
+				name: entity.name,
+				price: entity.price,
+				promotionalPrice: entity.promotionalPrice
+			},
+			where: {
+				id: entity.id
+			}
+		})
+	}
+
+	async find(id: string): Promise<Product> {
+		const model = await prisma.product.findFirst({
+			where: {
+				id
+			}
+		})
+
+		if (!model) throw new Error("Product not found")
+
+		const product = new Client()
+
+		return product
+	}
+
+	async delete(id: string): Promise<void> {
+		console.log(id)
+		await prisma.product.delete({
+			where: {
+				id
+			}
+		})
 	}
 }

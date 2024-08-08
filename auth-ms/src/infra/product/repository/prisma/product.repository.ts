@@ -1,5 +1,4 @@
 import { Product } from "../../../../domain/product/entity/product";
-import { ProductFactory } from "../../../../domain/product/factory/product.factory";
 import { prisma } from "../../../db/prisma/primsa";
 import type { ProductRepositoryInterface } from "./product-repository.interface";
 
@@ -60,7 +59,8 @@ export class ProductRepository implements ProductRepositoryInterface {
 
 		if (!model) throw new Error("Product not found")
 
-		const product = ProductFactory.create(
+		const product = new Product(
+			model.id,
 			model.name,
 			model.code,
 			model.cost,
