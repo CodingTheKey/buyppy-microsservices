@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
+import { DeleteClientController } from "../../interfaces/controllers/client/delete-client.controller";
 import { FindClientByIdController } from "../../interfaces/controllers/client/find-client-by-id.controller";
 import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
@@ -36,6 +37,7 @@ app.delete("/product/:id", DeleteProductController.execute)
 app.get("/product/:id", FetchProductByIdController.execute)
 
 app.get("/client/:id", FindClientByIdController.execute)
+app.delete("/client/:id", DeleteClientController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");
