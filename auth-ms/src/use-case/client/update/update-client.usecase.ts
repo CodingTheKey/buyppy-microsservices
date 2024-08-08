@@ -10,15 +10,15 @@ export class UpdateClientUseCase {
 		this.clientRepository = clientRepository;
 	}
 
-  async execute(input: InputUpdateClientDTO) {
+  async execute(id: string, input: InputUpdateClientDTO) {
     const address = new Address(
-      input.address.id,
-      input.address.street,
-      input.address.number,
-      input.address.zipCode
+      input?.address?.id,
+      input?.address?.street,
+      input?.address?.number,
+      input?.address?.zipCode
     )
     const client = new Client(
-      input.id,
+      id,
       input.document,
       input.phone,
       input.email,
@@ -26,6 +26,10 @@ export class UpdateClientUseCase {
       input.observations,
       address
     )
-    this.clientRepository.update(client)
+
+    console.log(client)
+    await this.clientRepository.update(client)
+
+    return client
   }
 }
