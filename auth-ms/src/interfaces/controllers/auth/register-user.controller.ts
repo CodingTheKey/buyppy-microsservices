@@ -22,8 +22,6 @@ export class RegisterUserController {
 				},
 			};
 
-			console.log(registerClientDTO)
-
 			const usercase = new RegisterUserUseCase(new ClientRepository());
 			const result = await usercase.execute(registerClientDTO, c.env.JWT_SECRET);
 

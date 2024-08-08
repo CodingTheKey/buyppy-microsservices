@@ -30,7 +30,6 @@ export class CreateProductController {
       return c.newResponse(JSON.stringify(response), 201)
     // biome-ignore lint/suspicious/noExplicitAny: <all exception must be any typed>
     } catch (e: any) {
-      console.log(e.message)
       throw new HTTPException(500, { message: JSON.stringify({
         message: 'Error when trying to create new product!',
         error: e.message

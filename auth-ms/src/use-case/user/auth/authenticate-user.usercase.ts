@@ -1,6 +1,5 @@
-import { hash } from "bcryptjs";
 import { sign } from "hono/jwt";
-import { UserRepositoryInterface } from "../../../infra/user/repository/prisma/user-repository.interface";
+import type { UserRepositoryInterface } from "../../../infra/user/repository/prisma/user-repository.interface";
 import { ComparePassword } from "../../../utils/compare-passwors";
 import { UserMapper } from "../mapper/auth.mapper";
 import type { InputAuthenticateUserDTO } from "./auth-user.dto";
@@ -14,7 +13,6 @@ export class AuthenticateUserUseCase {
 
 	async execute(input: InputAuthenticateUserDTO) {
 		const comparePassword = new ComparePassword();
-		console.log(await hash(input.password, 1))
 
 		const user = await this.userRepository.findByEmail(input.email);
 

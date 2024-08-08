@@ -115,7 +115,6 @@ export class ClientRepository implements ClientRepositoryInterface {
 	}
 
 	async update(entity: Client): Promise<void> {
-		console.log('repository', entity.id)
 		const now = new Date()
 		await prisma.client.update({
 			data: {

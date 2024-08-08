@@ -27,7 +27,6 @@ export class UpdateClientUseCase {
       address
     )
 
-    console.log(client)
     await this.clientRepository.update(client)
 
     return client
