@@ -131,18 +131,37 @@ export class ClientRepository implements ClientRepositoryInterface {
 		})
 	}
 
-	async find(id: string): Promise<Product> {
-		const model = await prisma.product.findFirst({
+	async find(id: string): Promise<Client> {
+		const model = await prisma.client.findFirst({
 			where: {
 				id
+			},
+			include: {
+				address: true
 			}
 		})
 
 		if (!model) throw new Error("Product not found")
 
-		const product = new Client()
+		const address = new Address(
+			model.address.id,
+			model.address.street,
+			model.address.number,
+			model.address.zipCode
+		)
 
-		return product
+		const client = new Client(
+			model.id,
+			model.document,
+			model.phone,
+			model.email,
+			model.name,
+			model.createdAt,
+			model.observations,
+			address
+		)
+
+		return client
 	}
 
 	async delete(id: string): Promise<void> {
