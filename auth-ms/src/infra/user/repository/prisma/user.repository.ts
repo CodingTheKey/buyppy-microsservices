@@ -1,6 +1,6 @@
 import { User } from "../../../../domain/user/entity/User";
 import { prisma } from "../../../db/prisma/primsa";
-import { UserRepositoryInterface } from "./user-repository.interface";
+import type { UserRepositoryInterface } from "./user-repository.interface";
 
 export class UserRepository implements UserRepositoryInterface {
   async findByEmail(email: string): Promise<User> {
@@ -32,6 +32,9 @@ export class UserRepository implements UserRepositoryInterface {
 		throw new Error("Method not implemented!")
 	}
 	async find(id: string): Promise<User> {
+		throw new Error("Method not implemented!")
+	}
+  async delete(id: string): Promise<void> {
 		throw new Error("Method not implemented!")
 	}
 }
