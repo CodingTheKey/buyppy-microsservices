@@ -149,7 +149,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 			}
 		})
 
-		if (!model) throw new Error("Product not found")
+		if (!model) throw new Error("Client not found")
 
 		const address = new Address(
 			model.address.id,
