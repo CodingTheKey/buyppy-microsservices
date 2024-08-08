@@ -7,7 +7,7 @@ export default class Client extends Entity {
 	private _phone: string;
 	private _email: string;
 	private _name: string;
-	private _createdAt: Date
+	private _createdAt: Date | null
 	private _observations: string
 
 	private _address: Address
@@ -18,11 +18,11 @@ export default class Client extends Entity {
 		phone: string,
 		email: string,
 		name: string,
-		created_at: Date,
-
 		observations: string,
 
-		address: Address
+		address: Address,
+
+		created_at: Date | null = null,
 	) {
 		super();
 		this._id = id;

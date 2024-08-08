@@ -30,10 +30,10 @@ export class ClientRepository implements ClientRepositoryInterface {
 				user.phone,
 				user.email,
 				user.name,
-				new Date(),
 				user.observations,
 
 				address,
+				new Date(),
 			);
 
 			return userEntity;
@@ -68,11 +68,11 @@ export class ClientRepository implements ClientRepositoryInterface {
 			user.phone,
 			user.email,
 			user.name,
-			new Date(),
 
 			user.observations,
 
 			address,
+			new Date(),
 		);
 
 		return userEntity;
@@ -164,9 +164,9 @@ export class ClientRepository implements ClientRepositoryInterface {
 			model.phone,
 			model.email,
 			model.name,
-			model.createdAt,
 			model.observations,
-			address
+			address,
+			model.createdAt,
 		)
 
 		return client
