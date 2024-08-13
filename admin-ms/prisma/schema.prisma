@@ -35,6 +35,7 @@ model Client {
   name      String
   addressId String  @unique @map("address_id")
   address   Address @relation(fields: [addressId], references: [id])
+  orders    Order[]
 
   observations String
 
@@ -84,6 +85,7 @@ model Product {
   category         String
   inventories      Inventory[]
   attributes       ProductAttribute[]
+  orderItems       OrderItem[]
 
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @map("updated_at")
@@ -115,4 +117,39 @@ model Inventory {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("inventories")
+}
+
+model Order {
+  id       String      @id @default(uuid())
+  clientId String      @map("client_id")
+  client   Client      @relation(fields: [clientId], references: [id])
+  status   String
+  total    Float
+  items    OrderItem[]
+
+  refundedAt   DateTime? @map("refunded_at")
+  refundReason String?   @map("refund_reason")
+
+  canceledAt   DateTime? @map("canceled_at")
+  cancelReason String?   @map("cancel_reason")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String  @map("order_id")
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("order_items")
 }
