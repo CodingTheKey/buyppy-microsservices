@@ -16,21 +16,13 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
             price: i.price,
             productId: i.productId,
             quantity: i.quantity,
-            createdAt: i.createdAt,
+            createdAt: new Date(),
           }))
         },
 
         total: entity.total,
 
-        canceledAt: entity.canceledAt,
-        cancelReason: entity.canceleReason,
-
-        refundedAt: entity.refundedAt,
-        refundReason: entity.refundReason,
-
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
-        deletedAt: entity.deletedAt,
+        createdAt: new Date(),
       }
     })
   }

@@ -14,18 +14,8 @@ export class CreateOrderUseCase {
       input.clientId,
       input.status,
       input.total,
-      input.items,
-
-      input.refundedAt,
-      input.refundReason,
-
-      input.canceledAt,
-      input.cancelReason,
-
-      input.createdAt,
-      input.updatedAt,
-      input.deletedAt,
+      input.items
     )
-    // this.orderRepository.create()
+    this.orderRepository.create(order)
   }
 }

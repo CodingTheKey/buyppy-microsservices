@@ -8,15 +8,15 @@ export class Order extends Entity {
   private _total: number
   private _items: OrderItem[]
 
-  private _refundedAt: Date
-  private _refundReason: string
+  private _refundedAt: Date | null
+  private _refundReason: string | null
 
-  private _canceledAt: Date
-  private _canceleReason: string
+  private _canceledAt: Date | null
+  private _canceleReason: string | null
 
-  private _createdAt: Date
-  private _updatedAt: Date
-  private _deletedAt: Date
+  private _createdAt: Date | null
+  private _updatedAt: Date | null
+  private _deletedAt: Date | null
 
   constructor(
     id: string,
@@ -25,15 +25,15 @@ export class Order extends Entity {
     total: number,
     items: OrderItem[],
 
-    refundedAt: Date,
-    refundReason: string,
+    refundedAt: Date | null = null,
+    refundReason: string | null = null,
 
-    canceledAt: Date,
-    canceleReason: string,
+    canceledAt: Date | null = null,
+    canceleReason: string | null = null,
 
-    createdAt: Date,
-    updatedAt: Date,
-    deletedAt: Date,
+    createdAt: Date | null = null,
+    updatedAt: Date | null = null,
+    deletedAt: Date | null = null,
   ) {
     super()
     this._id = id
@@ -75,31 +75,31 @@ export class Order extends Entity {
     return this._items;
   }
 
-  get refundedAt(): Date {
+  get refundedAt(): Date | null {
     return this._refundedAt;
   }
 
-  get refundReason(): string {
+  get refundReason(): string | null {
     return this._refundReason;
   }
 
-  get canceledAt(): Date {
+  get canceledAt(): Date | null {
     return this._canceledAt;
   }
 
-  get canceleReason(): string {
+  get canceleReason(): string | null {
     return this._canceleReason;
   }
 
-  get createdAt(): Date {
+  get createdAt(): Date | null {
     return this._createdAt;
   }
 
-  get updatedAt(): Date {
+  get updatedAt(): Date | null {
     return this._updatedAt;
   }
 
-  get deletedAt(): Date {
+  get deletedAt(): Date | null {
     return this._deletedAt;
   }
 }
