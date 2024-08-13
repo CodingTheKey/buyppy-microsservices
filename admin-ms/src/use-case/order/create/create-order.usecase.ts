@@ -1,4 +1,5 @@
 import { OrderRepositoryInterface } from "../../../infra/order/repository/order-repository.interface"
+import { InputCreateOrderDTO } from "./input-create-order.dto"
 
 export class CreateOrderUseCase {
   private orderRepository: OrderRepositoryInterface
@@ -7,7 +8,7 @@ export class CreateOrderUseCase {
     this.orderRepository = orderRepository
   }
 
-  async execute() {
-
+  async execute(input: InputCreateOrderDTO) {
+    // this.orderRepository.create()
   }
 }
