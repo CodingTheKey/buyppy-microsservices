@@ -2,7 +2,7 @@ import { Order } from "../../../../domain/order/entity/order";
 import { prisma } from "../../../db/prisma/primsa";
 import { OrderRepositoryInterface } from "../order-repository.interface";
 
-export class OrderRepository implements OrderRepositoryInterface {
+export class PrismaOrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
     await prisma.order.create({
       data: {
