@@ -15,7 +15,8 @@ export class UpdateClientUseCase {
       input?.address?.id,
       input?.address?.street,
       input?.address?.number,
-      input?.address?.zipCode
+      input?.address?.zipCode,
+      input?.address?.city
     )
     const client = new Client(
       id,

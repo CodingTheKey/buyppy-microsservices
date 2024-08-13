@@ -22,6 +22,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 				user.address.street,
 				user.address.number,
 				user.address.zipCode,
+				user.address.city
 			);
 
 			const userEntity = new Client(
@@ -60,6 +61,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 			user.address.street,
 			user.address.number,
 			user.address.zipCode,
+			user.address.city
 		);
 
 		const userEntity = new Client(
@@ -89,10 +91,11 @@ export class ClientRepository implements ClientRepositoryInterface {
 
 		const address = await prisma.address.create({
 			data: {
+				id: uuidv4(),
 				street: entity.address.id,
 				number: entity.address.number,
 				zipCode: entity.address.zipCode,
-				id: uuidv4(),
+				city: entity.address.city,
 			},
 		});
 
@@ -129,6 +132,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 						number: entity.address.number,
 						street: entity.address.street,
 						zipCode: entity.address.zipCode,
+						city: entity.address.city,
 						updatedAt: now
 					}
 				}
@@ -155,7 +159,8 @@ export class ClientRepository implements ClientRepositoryInterface {
 			model.address.id,
 			model.address.street,
 			model.address.number,
-			model.address.zipCode
+			model.address.zipCode,
+			model.address.city
 		)
 
 		const client = new Client(

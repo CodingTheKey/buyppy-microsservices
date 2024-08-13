@@ -12,24 +12,26 @@ export class RegisterUserUseCase {
 		this.clientRepository = clientRepository;
 	}
 
-	async execute(input: RegisterClientDTO, JWT_SECRET: string) {
+	async execute(input: RegisterClientDTO) {
 		const address = new Address(
 			uuid(),
 			input.address.street,
 			input.address.number,
 			input.address.zip_code,
+			input.address.city
 		);
-		
+
 		const user = new Client(
 			uuid(),
 			input.document,
 			input.phone,
 			input.email,
 			input.name,
-			new Date(),
 			input.observations,
 
 			address,
+
+			new Date()
 		);
 
 		await this.clientRepository.create(user);

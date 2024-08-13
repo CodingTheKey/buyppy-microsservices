@@ -9,6 +9,7 @@ export type InputUpdateClientDTO = {
     id: string,
     number: number,
     street: string,
-    zipCode: string
+    zipCode: string,
+    city: string
   }
 }

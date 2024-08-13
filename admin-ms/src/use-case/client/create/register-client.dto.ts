@@ -9,5 +9,6 @@ export type RegisterClientDTO = {
 		street: string;
 		number: number;
 		zip_code: string;
+		city: string;
 	};
 };
