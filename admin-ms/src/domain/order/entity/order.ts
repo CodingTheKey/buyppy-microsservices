@@ -59,6 +59,11 @@ export class Order extends Entity {
     OrderValidatorFactory.create().validate(this)
   }
 
+  cancelOrder(reason: string) {
+    this._canceledAt = new Date()
+    this._canceleReason = reason
+  }
+
   get clientId(): string {
     return this._clientId;
   }
