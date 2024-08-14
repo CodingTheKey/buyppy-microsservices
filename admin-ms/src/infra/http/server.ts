@@ -5,6 +5,7 @@ import { RegisterUserController } from "../../interfaces/controllers/auth/regist
 import { DeleteClientController } from "../../interfaces/controllers/client/delete-client.controller";
 import { FindClientByIdController } from "../../interfaces/controllers/client/find-client-by-id.controller";
 import { UpdateClientController } from "../../interfaces/controllers/client/update-client.controller";
+import { CancelOrderController } from "../../interfaces/controllers/orders/cancel-order.controller";
 import { CreateOrderController } from "../../interfaces/controllers/orders/create-order.controller";
 import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
@@ -43,6 +44,7 @@ app.delete("/client/:id", DeleteClientController.execute)
 app.put("/client/:id", UpdateClientController.execute)
 
 app.post("/order/create", CreateOrderController.execute)
+app.patch("/order/cancel/:id", CancelOrderController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");
