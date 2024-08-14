@@ -4,6 +4,7 @@ import { Order } from "./entity/order";
 export class OrderMapper {
   static execute(order: Order) {
     return {
+      id: order.id,
       clientId: order.clientId,
       status: order.status,
       total: order.total,
