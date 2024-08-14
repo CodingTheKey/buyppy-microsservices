@@ -7,6 +7,8 @@ import { FindClientByIdController } from "../../interfaces/controllers/client/fi
 import { UpdateClientController } from "../../interfaces/controllers/client/update-client.controller";
 import { CancelOrderController } from "../../interfaces/controllers/orders/cancel-order.controller";
 import { CreateOrderController } from "../../interfaces/controllers/orders/create-order.controller";
+import { FetchAllOrderController } from "../../interfaces/controllers/orders/fetch-all-orders.controller";
+import { FindOrderController } from "../../interfaces/controllers/orders/find-order.controller";
 import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
 import { FetchAllProductsController } from "../../interfaces/controllers/products/fetch-all-products.controller";
@@ -45,6 +47,8 @@ app.put("/client/:id", UpdateClientController.execute)
 
 app.post("/order/create", CreateOrderController.execute)
 app.patch("/order/cancel/:id", CancelOrderController.execute)
+app.get("/order/all", FetchAllOrderController.execute)
+app.get("/order/:id", FindOrderController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

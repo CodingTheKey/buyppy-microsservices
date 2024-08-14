@@ -90,8 +90,41 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
 
     return order
   }
-  findAll(): Promise<Order[]> {
-    throw new Error("Method not implemented.");
+  async findAll(): Promise<Order[]> {
+    const model = await prisma.order.findMany({
+      include: {
+        items: true
+      }
+    })
+
+    const orders = model.map((o) => {
+      const items = o?.items.map(i => new OrderItem(
+        i.id,
+        i.orderId,
+        i.productId,
+        i.quantity,
+        i.price,
+        i.createdAt
+      ))
+      const order = new Order(
+        o.id,
+        o.clientId,
+        o.status,
+        o.total,
+        items,
+        o.refundedAt,
+        o.refundReason,
+        o.canceledAt,
+        o.cancelReason,
+        o.createdAt,
+        o.updatedAt,
+        o.deletedAt
+      )
+
+      return order
+    })
+
+    return orders
   }
   delete(id: string): Promise<void> {
     throw new Error("Method not implemented.");
