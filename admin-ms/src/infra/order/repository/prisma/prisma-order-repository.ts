@@ -4,6 +4,25 @@ import { OrderRepositoryInterface } from "../order-repository.interface";
 
 export class PrismaOrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
+    console.log({
+        id: entity.id,
+        clientId: entity.clientId,
+        status: entity.status,
+
+        items: {
+          create: entity.items.map((i) => ({
+            id: i.id,
+            price: i.price,
+            productId: i.productId,
+            quantity: i.quantity,
+            createdAt: new Date(),
+          }))
+        },
+
+        total: entity.total,
+
+        createdAt: new Date(),
+      })
     await prisma.order.create({
       data: {
         id: entity.id,

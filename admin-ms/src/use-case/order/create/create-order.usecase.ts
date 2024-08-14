@@ -16,6 +16,6 @@ export class CreateOrderUseCase {
       input.total,
       input.items
     )
-    this.orderRepository.create(order)
+    await this.orderRepository.create(order)
   }
 }
