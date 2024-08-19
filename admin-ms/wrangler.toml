@@ -2,7 +2,7 @@ name = "buyppy-auth-ms"
 compatibility_date = "2024-07-17"
 
 [vars]
-DATABASE_URL = "postgresql://buyppy_ps_user:19kfH8gEOuhN0cYyhZ4ZyoFfFDNEoVc4@dpg-cqbhsdqju9rs7391lflg-a.oregon-postgres.render.com/buyppy_ps"
+DATABASE_URL = "postgresql://buyppy-db_owner:aiykWGY4Df3b@ep-withered-term-a53vlnyx.us-east-2.aws.neon.tech/buyppy-db?sslmode=require"
 DIRECT_DATABASE_URL = "postgresql://buyppy_ps_user:19kfH8gEOuhN0cYyhZ4ZyoFfFDNEoVc4@dpg-cqbhsdqju9rs7391lflg-a.oregon-postgres.render.com/buyppy_ps"
 JWT_SECRET = "123#321"
 
