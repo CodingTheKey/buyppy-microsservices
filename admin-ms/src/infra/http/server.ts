@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
 import { DeleteClientController } from "../../interfaces/controllers/client/delete-client.controller";
+import { ExportClientsController } from "../../interfaces/controllers/client/export-clients.controller";
 import { FindClientByIdController } from "../../interfaces/controllers/client/find-client-by-id.controller";
 import { UpdateClientController } from "../../interfaces/controllers/client/update-client.controller";
 import { CancelOrderController } from "../../interfaces/controllers/orders/cancel-order.controller";
@@ -34,6 +35,7 @@ app.post("/login", AuthController.execute);
 
 app.post("/client/create", registerUserController.register);
 app.get("/client/all", fetchUsersController.fetchByOrganization);
+app.get("/client/export", ExportClientsController.execute);
 
 app.get("/product/all", FetchAllProductsController.fetchAll)
 app.post("product/create", CreateProductController.execute)
