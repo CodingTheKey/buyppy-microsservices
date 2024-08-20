@@ -11,6 +11,7 @@ export class UserMapper {
       name: user.name,
       observations: user.observations,
       address: {
+        city: user.address.city,
         street: user.address.street,
         number: user.address.number,
         zipCode: user.address.zipCode,

@@ -16,6 +16,7 @@ export class RegisterUserController {
 				phone: input.phone,
 				observations: input.observations,
 				address: {
+					city: input.address.city,
 					street: input.address.street,
 					number: input.address.number,
 					zip_code: input.address.zip_code,
