@@ -32,9 +32,6 @@ const fetchUsersController = new FetchByOrganizationController();
 
 app.post("/login", AuthController.execute);
 
-app.post("/client/create", registerUserController.register);
-app.get("/client/all", fetchUsersController.fetchByOrganization);
-
 app.get("/product/all", FetchAllProductsController.fetchAll)
 app.post("product/create", CreateProductController.execute)
 app.put("/product/:id", UpdateProductController.execute)
@@ -44,7 +41,8 @@ app.get("/product/:id", FetchProductByIdController.execute)
 app.get("/client/:id", FindClientByIdController.execute)
 app.delete("/client/:id", DeleteClientController.execute)
 app.put("/client/:id", UpdateClientController.execute)
-
+app.post("/client/create", registerUserController.register);
+app.get("/client/all", fetchUsersController.fetchByOrganization);
 
 app.post("/order/create", CreateOrderController.execute)
 app.patch("/order/cancel/:id", CancelOrderController.execute)
