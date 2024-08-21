@@ -66,4 +66,8 @@ export default class Client extends Entity {
 	get observations(): string {
 		return this._observations
 	}
-}
+
+	get createdAt(): Date | null {
+		return this._createdAt
+	}
+} 

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import Client from "../../../../domain/client/entity/client";
 import { Address } from "../../../../domain/client/value-object/address";
@@ -221,5 +222,65 @@ export class ClientRepository implements ClientRepositoryInterface {
 				id
 			}
 		})
+	}
+
+	async countAll(): Promise<number> {
+		const count = await prisma.client.count()
+
+		return count
+	}
+	async countDailyCreated(
+			start: Date = new Date(dayjs().valueOf()),
+	): Promise<Client[]> {
+		const startDate = dayjs(start).startOf('month');
+		const endDate = dayjs(startDate).add(1, 'day').endOf('month');
+
+		const clients = await prisma.client.findMany({
+			include: {
+				address: true
+			},
+			where: {
+				createdAt: {
+					gte: startDate.toDate(),
+					lt: endDate.add(1, 'day').toDate(),
+				},
+			},
+		});
+
+		const result = clients.map((c) => {
+			if (!c) throw new Error("User not found.");
+			if (!c.address)
+				throw new Error("User has not address, please update user.");
+
+			const address = new Address(
+				c.id,
+				c.address.street,
+				c.address.number,
+				c.address.zipCode,
+				c.address.city
+			);
+
+			const userEntity = new Client(
+				c.id,
+				c.document,
+				c.phone,
+				c.email,
+				c.name,
+				c.observations,
+
+				address,
+				c.createdAt,
+			);
+
+			return userEntity;
+		})
+
+		return result
+	}
+	countMonthlyCreated(start: Date, end: Date): Promise<Record<string, any>[]> {
+		throw new Error("Method not implemented.");
+	}
+	countAnnualCreated(start: Date, end: Date): Promise<Record<string, any>[]> {
+		throw new Error("Method not implemented.");
 	}
 }

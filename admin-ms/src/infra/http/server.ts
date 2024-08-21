@@ -16,6 +16,7 @@ import { ExportProductsController } from "../../interfaces/controllers/products/
 import { FetchAllProductsController } from "../../interfaces/controllers/products/fetch-all-products.controller";
 import { FetchProductByIdController } from "../../interfaces/controllers/products/fetch-product-by-id.controller";
 import { UpdateProductController } from "../../interfaces/controllers/products/update-product.controller";
+import { ClientRepositoryController } from "../../interfaces/controllers/report/client/client-report.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
 
 export const app = new Hono();
@@ -38,14 +39,17 @@ app.post("/client/create", registerUserController.register);
 app.get("/client/all", fetchUsersController.fetchByOrganization);
 app.get("/client/export", ExportClientsController.execute);
 
-app.post("product/create", CreateProductController.execute)
 app.get("/product/all", FetchAllProductsController.fetchAll)
+app.post("product/create", CreateProductController.execute)
 app.get("/product/export", ExportProductsController.execute);
 
 app.put("/product/:id", UpdateProductController.execute)
 app.delete("/product/:id", DeleteProductController.execute)
 app.get("/product/:id", FetchProductByIdController.execute)
 
+app.post("/client/create", registerUserController.register);
+app.get("/client/all", fetchUsersController.fetchByOrganization);
+app.get("/client/report", ClientRepositoryController.execute)
 app.get("/client/:id", FindClientByIdController.execute)
 app.delete("/client/:id", DeleteClientController.execute)
 app.put("/client/:id", UpdateClientController.execute)

@@ -1,5 +1,5 @@
 name = "buyppy-auth-ms"
-compatibility_date = "2024-07-17"
+compatibility_date = "2024-07-12"
 
 [vars]
 DATABASE_URL = "postgresql://buyppy-db_owner:aiykWGY4Df3b@ep-withered-term-a53vlnyx.us-east-2.aws.neon.tech/buyppy-db?sslmode=require"
