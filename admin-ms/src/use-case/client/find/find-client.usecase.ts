@@ -1,3 +1,4 @@
+import { UserMapper } from "../../../domain/client/mapper"
 import type { ClientRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface"
 
 export class FindClientUseCase {
@@ -8,8 +9,8 @@ export class FindClientUseCase {
   }
 
   async execute(id: string) {
-    const client = this.clientRepository.find(id)
+    const client = await this.clientRepository.find(id)
 
-    return client
+    return UserMapper.execute(client)
   }
 }
