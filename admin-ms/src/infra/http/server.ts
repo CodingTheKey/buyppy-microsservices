@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
 import { DeleteClientController } from "../../interfaces/controllers/client/delete-client.controller";
+import { ExportClientsController } from "../../interfaces/controllers/client/export-clients.controller";
 import { FindClientByIdController } from "../../interfaces/controllers/client/find-client-by-id.controller";
 import { UpdateClientController } from "../../interfaces/controllers/client/update-client.controller";
 import { CancelOrderController } from "../../interfaces/controllers/orders/cancel-order.controller";
@@ -11,6 +12,7 @@ import { FetchAllOrderController } from "../../interfaces/controllers/orders/fet
 import { FindOrderController } from "../../interfaces/controllers/orders/find-order.controller";
 import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
+import { ExportProductsController } from "../../interfaces/controllers/products/export-product.controller";
 import { FetchAllProductsController } from "../../interfaces/controllers/products/fetch-all-products.controller";
 import { FetchProductByIdController } from "../../interfaces/controllers/products/fetch-product-by-id.controller";
 import { UpdateProductController } from "../../interfaces/controllers/products/update-product.controller";
@@ -33,8 +35,14 @@ const fetchUsersController = new FetchByOrganizationController();
 
 app.post("/login", AuthController.execute);
 
+app.post("/client/create", registerUserController.register);
+app.get("/client/all", fetchUsersController.fetchByOrganization);
+app.get("/client/export", ExportClientsController.execute);
+
 app.get("/product/all", FetchAllProductsController.fetchAll)
 app.post("product/create", CreateProductController.execute)
+app.get("/product/export", ExportProductsController.execute);
+
 app.put("/product/:id", UpdateProductController.execute)
 app.delete("/product/:id", DeleteProductController.execute)
 app.get("/product/:id", FetchProductByIdController.execute)

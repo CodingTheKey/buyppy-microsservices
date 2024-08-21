@@ -114,9 +114,47 @@ export class ClientRepository implements ClientRepositoryInterface {
 		});
 	}
 
-	findAll(): Promise<Client[]> {
-		throw new Error("Method not implemented.");
-	}
+	async findAll(): Promise<Client[]> {
+    try {
+        const clients = await prisma.client.findMany({
+            include: {
+                address: true,
+            },
+        });
+
+        const result = clients.map((client) => {
+            if (!client.address) {
+                throw new Error("Client has no address, please update client.");
+            }
+
+            const address = new Address(
+                client.address.id,
+                client.address.street,
+                client.address.number,
+                client.address.zipCode,
+                client.address.city
+            );
+
+            const clientEntity = new Client(
+                client.id,
+                client.document,
+                client.phone,
+                client.email,
+                client.name,
+                client.observations,
+                address,
+                client.createdAt,
+            );
+
+            return clientEntity;
+        });
+
+        return result;
+    } catch (error) {
+        console.error("Error retrieving clients:", error);
+        throw error;
+    }
+}
 
 	async update(entity: Client): Promise<void> {
 		const now = new Date()
