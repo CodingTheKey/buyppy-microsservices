@@ -8,7 +8,7 @@ export interface ClientRepositoryInterface extends RepositoryInterface<Client> {
 
   countAll(): Promise<number>
 
-  countDailyCreated(start: Date, end: Date): Promise<number>
-  countMonthlyCreated(start: Date, end: Date): Promise<number>
-  countAnnualCreated(start: Date, end: Date): Promise<number>
+  countDailyCreated(start?: Date, end?: Date): Promise<Record<string, any>>
+  countMonthlyCreated(start?: Date, end?: Date): Promise<Record<string, any>>
+  countAnnualCreated(start?: Date, end?: Date): Promise<Record<string, any>>
 }

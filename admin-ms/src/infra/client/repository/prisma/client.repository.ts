@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import Client from "../../../../domain/client/entity/client";
 import { Address } from "../../../../domain/client/value-object/address";
@@ -190,22 +191,30 @@ export class ClientRepository implements ClientRepositoryInterface {
 
 		return count
 	}
-	async countDailyCreated(start: Date, end: Date): Promise<number> {
-		const count = await prisma.client.count({
+	async countDailyCreated(
+		start: Date = new Date(dayjs().subtract(1, 'month').valueOf()),
+		end: Date = new Date()
+): Promise<Record<string, any>> {
+		console.log(start)
+		const count = await prisma.client.groupBy({
+			by: ['createdAt'],
+			_count: {
+				_all: true
+			},
 			where: {
 				createdAt: {
-					gte: new Date(),
-					lt: new Date()
+					gte: start,
+					lt: end
 				}
-			}
+			},
 		})
 
 		return count
 	}
-	countMonthlyCreated(start: Date, end: Date): Promise<number> {
+	countMonthlyCreated(start: Date, end: Date): Promise<Record<string, any>> {
 		throw new Error("Method not implemented.");
 	}
-	countAnnualCreated(start: Date, end: Date): Promise<number> {
+	countAnnualCreated(start: Date, end: Date): Promise<Record<string, any>> {
 		throw new Error("Method not implemented.");
 	}
 }

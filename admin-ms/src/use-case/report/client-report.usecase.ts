@@ -10,8 +10,8 @@ export class ClientReportUseCase {
   execute(period: 'daily' | 'monthly' | 'annual' = 'daily') {
     let result
 
-    if (period === 'daily') result = this.clientRepository.countAll()
-    if (period === 'monthly') throw new Error('option not implemented')
+    if (period === 'daily') result = this.clientRepository.countDailyCreated()
+    if (period === 'monthly') result = this.clientRepository.countMonthlyCreated()
     if (period === 'annual') throw new Error('option not implemented')
 
     return result
