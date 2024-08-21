@@ -184,4 +184,28 @@ export class ClientRepository implements ClientRepositoryInterface {
 			}
 		})
 	}
+
+	async countAll(): Promise<number> {
+		const count = await prisma.client.count()
+
+		return count
+	}
+	async countDailyCreated(start: Date, end: Date): Promise<number> {
+		const count = await prisma.client.count({
+			where: {
+				createdAt: {
+					gte: new Date(),
+					lt: new Date()
+				}
+			}
+		})
+
+		return count
+	}
+	countMonthlyCreated(start: Date, end: Date): Promise<number> {
+		throw new Error("Method not implemented.");
+	}
+	countAnnualCreated(start: Date, end: Date): Promise<number> {
+		throw new Error("Method not implemented.");
+	}
 }
