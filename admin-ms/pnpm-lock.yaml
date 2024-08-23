@@ -17,12 +17,12 @@ importers:
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
-      exceljs:
-        specifier: ^4.4.0
-        version: 4.4.0
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      exceljs:
+        specifier: ^4.4.0
+        version: 4.4.0
       hono:
         specifier: ^4.5.0
         version: 4.5.0
@@ -482,9 +482,8 @@ packages:
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
-  dayjs@1.11.12:
-    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
-
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
@@ -1328,7 +1327,7 @@ snapshots:
   exceljs@4.4.0:
     dependencies:
       archiver: 5.3.2
-      dayjs: 1.11.12
+      dayjs: 1.11.13
       fast-csv: 4.3.6
       jszip: 3.10.1
       readable-stream: 3.6.2
