@@ -83,9 +83,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 
 	async create(entity: Client): Promise<void> {
 		let userVerifier!: Client;
-		try {
-			userVerifier = await this.findByEmail(entity.email);
-		} catch (err) {}
+		userVerifier = await this.findByEmail(entity.email);
 
 		if (userVerifier && userVerifier.email.length >= 1)
 			throw new Error("User email already registered");

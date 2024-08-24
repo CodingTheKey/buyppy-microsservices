@@ -59,6 +59,11 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         id
       },
       include: {
+        client: {
+          select: {
+            name: true
+          }
+        },
         items: true
       }
     })
@@ -79,6 +84,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       model.status,
       model.total,
       items,
+      model.client.name,
       model.refundedAt,
       model.refundReason,
       model.canceledAt,
@@ -93,6 +99,11 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
   async findAll(): Promise<Order[]> {
     const model = await prisma.order.findMany({
       include: {
+        client: {
+          select: {
+            name: true
+          }
+        },
         items: true
       }
     })
@@ -112,6 +123,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         o.status,
         o.total,
         items,
+        o.client.name,
         o.refundedAt,
         o.refundReason,
         o.canceledAt,

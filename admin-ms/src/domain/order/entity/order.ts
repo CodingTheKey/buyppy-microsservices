@@ -8,6 +8,8 @@ export class Order extends Entity {
   private _total: number
   private _items: OrderItem[]
 
+	private _clientName: string
+
   private _refundedAt: Date | null
   private _refundReason: string | null
 
@@ -25,6 +27,8 @@ export class Order extends Entity {
     total: number,
     items: OrderItem[],
 
+    clientName: string,
+
     refundedAt: Date | null = null,
     refundReason: string | null = null,
 
@@ -41,6 +45,7 @@ export class Order extends Entity {
     this._status = status
     this._total = total
     this._items = items
+    this._clientName = clientName
 
     this._refundedAt = refundedAt
     this._refundReason = refundReason
@@ -78,6 +83,10 @@ export class Order extends Entity {
 
   get items(): OrderItem[] {
     return this._items;
+  }
+
+  get clientName(): string {
+    return this._clientName
   }
 
   get refundedAt(): Date | null {

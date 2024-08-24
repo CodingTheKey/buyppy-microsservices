@@ -7,10 +7,10 @@ export default class Client extends Entity {
 	private _phone: string;
 	private _email: string;
 	private _name: string;
-	private _createdAt: Date | null
-	private _observations: string
+	private _createdAt: Date | null;
+	private _observations: string;
 
-	private _address: Address
+	private _address: Address;
 
 	constructor(
 		id: string,

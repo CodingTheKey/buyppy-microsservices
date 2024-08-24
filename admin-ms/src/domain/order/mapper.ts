@@ -8,6 +8,7 @@ export class OrderMapper {
       clientId: order.clientId,
       status: order.status,
       total: order.total,
+      clientName: order.clientName,
 
       items: order.items.map(i => ({
         orderId: i.orderId,
