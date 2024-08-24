@@ -93,7 +93,7 @@ export class ClientRepository implements ClientRepositoryInterface {
 		const address = await prisma.address.create({
 			data: {
 				id: uuidv4(),
-				street: entity.address.id,
+				street: entity.address.street,
 				number: entity.address.number,
 				zipCode: entity.address.zipCode,
 				city: entity.address.city,

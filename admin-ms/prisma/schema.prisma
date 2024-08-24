@@ -77,7 +77,6 @@ model Product {
   price            Float
   promotionalPrice Float?             @map("promotional_price")
   category         String
-  inventories      Inventory[]
   attributes       ProductAttribute[]
   orderItems       OrderItem[]
 
@@ -98,19 +97,6 @@ model ProductAttribute {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("product_attributes")
-}
-
-model Inventory {
-  id        String  @id @default(uuid())
-  productId String  @map("product_id")
-  quantity  Int
-  location  String?
-
-  product Product @relation(fields: [productId], references: [id])
-
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@map("inventories")
 }
 
 model Order {
