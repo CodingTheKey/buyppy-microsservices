@@ -3,9 +3,11 @@ import { UserRepository } from "../../../infra/user/repository/prisma/user.repos
 import type { Context } from "../../../types";
 import type { InputAuthenticateUserDTO } from "../../../use-case/user/auth/auth-user.dto";
 import { AuthenticateUserUseCase } from "../../../use-case/user/auth/authenticate-user.usercase";
+import { HTTPExceptionHandler } from "../../../decorators/http-exceptions-handler.decorator";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AuthController {
+  @HTTPExceptionHandler()
 	static async execute(c: Context) {
 		try {
 			const input = await c.req.json<InputAuthenticateUserDTO>();

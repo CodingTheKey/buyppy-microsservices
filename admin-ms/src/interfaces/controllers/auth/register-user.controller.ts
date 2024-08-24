@@ -1,9 +1,11 @@
+import { HTTPExceptionHandler } from "../../../decorators/http-exceptions-handler.decorator";
 import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import type { RegisterClientDTO } from "../../../use-case/client/create/register-client.dto";
 import { RegisterUserUseCase } from "../../../use-case/client/create/register-client.usecase";
 
 export class RegisterUserController {
+  @HTTPExceptionHandler()
 	async register(c: Context) {
 		try {
 			const input = await c.req.json<RegisterClientDTO>();
@@ -24,7 +26,7 @@ export class RegisterUserController {
 			};
 
 			const usercase = new RegisterUserUseCase(new ClientRepository());
-			const result = await usercase.execute(registerClientDTO, c.env.JWT_SECRET);
+			const result = await usercase.execute(registerClientDTO);
 
 			const response = {
 				data: result,

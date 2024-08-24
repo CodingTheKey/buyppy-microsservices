@@ -1,4 +1,4 @@
-import { HTTPException } from "hono/http-exception";
+import { HTTPExceptionHandler } from "../../../decorators/http-exceptions-handler.decorator";
 import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 import type { Context } from "../../../types";
 import { FetchUserByOrganizationUseCase } from "../../../use-case/client/fetchByOrganization/fetchByOrganization.usecase";
@@ -9,22 +9,17 @@ export interface FetchUsersByOrganizationDTO {
 }
 
 export class FetchByOrganizationController {
+  @HTTPExceptionHandler()
 	async fetchByOrganization(c: Context) {
-		try {
-			const rawInput = await c.req.url;
-      const urlPramsUtil = new UrlParamsToObject()
+		const rawInput = await c.req.url;
+		const urlPramsUtil = new UrlParamsToObject()
 
-      const params = new URL(rawInput).searchParams
-      const input = urlPramsUtil.execute(params)
+		const params = new URL(rawInput).searchParams
+		const input = urlPramsUtil.execute(params)
 
-			const usecase = new FetchUserByOrganizationUseCase(new ClientRepository());
-			const result = await usecase.execute(input.organization_id);
+		const usecase = new FetchUserByOrganizationUseCase(new ClientRepository());
+		const result = await usecase.execute(input.organization_id);
 
-			return c.newResponse(JSON.stringify({ data: result }), 200);
-		// biome-ignore lint/suspicious/noExplicitAny: <error must be of type any in all cases>
-		} catch (err: any) {
-			console.error(err);
-			throw new HTTPException(400, { message: err.message });
-		}
+		return c.newResponse(JSON.stringify({ data: result }), 200);
 	}
 }
