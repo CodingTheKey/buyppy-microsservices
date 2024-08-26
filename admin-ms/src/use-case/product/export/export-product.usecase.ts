@@ -24,7 +24,6 @@ export class ExportProductsUseCase {
     const worksheet = workbook.addWorksheet("Products");
 
     worksheet.columns = [
-      { header: "ID", key: "id", width: 30 },
       { header: "Nome", key: "name", width: 30 },
       { header: "Código", key: "code", width: 20 },
       { header: "Custo", key: "cost", width: 15 },
@@ -32,9 +31,6 @@ export class ExportProductsUseCase {
       { header: "Preço Promocional", key: "promotionalPrice", width: 20 },
       { header: "Estoque", key: "stock", width: 20 },
       { header: "Categoria", key: "category", width: 20 },
-      { header: "Data de Criação", key: "createAt", width: 20 },
-      { header: "Data de Atualização", key: "updatedAt", width: 20 },
-      { header: "Data de Exclusão", key: "deletedAt", width: 20 },
     ];
 
     products.forEach((product) => {

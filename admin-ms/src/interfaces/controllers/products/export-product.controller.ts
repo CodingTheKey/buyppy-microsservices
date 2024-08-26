@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../decorators/http-exceptions-handler.decorator";
 import { ProductRepository } from "../../../infra/product/repository/prisma/product.repository";
-import { ExportProductsUseCase } from "../../../use-case/product/export/export-client.usecase";
+import { ExportProductsUseCase } from "../../../use-case/product/export/export-product.usecase";
 
 export class ExportProductsController {
   @HTTPExceptionHandler("Failed to export products")
