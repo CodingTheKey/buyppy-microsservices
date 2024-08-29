@@ -13,7 +13,7 @@ export class ProductFactory {
 
     createdAt: Date | null = null,
     updatedAt: Date | null = null,
-    deletedAt: Date | null = null
+    deletedAt: Date | null = null,
   ): Product {
     return new Product(
       uuid(),

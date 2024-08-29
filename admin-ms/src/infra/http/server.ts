@@ -10,7 +10,7 @@ import { CancelOrderController } from "../../interfaces/controllers/orders/cance
 import { CreateOrderController } from "../../interfaces/controllers/orders/create-order.controller";
 import { FetchAllOrderController } from "../../interfaces/controllers/orders/fetch-all-orders.controller";
 import { FindOrderController } from "../../interfaces/controllers/orders/find-order.controller";
-import { CreateProductController } from "../../interfaces/controllers/products/create-product.controller";
+import { CreateProductWithAttributesController } from "../../interfaces/controllers/products/create-product-with-attributes.controller";
 import { DeleteProductController } from "../../interfaces/controllers/products/delete-product.controller";
 import { ExportProductsController } from "../../interfaces/controllers/products/export-product.controller";
 import { FetchAllProductsController } from "../../interfaces/controllers/products/fetch-all-products.controller";
@@ -40,9 +40,8 @@ app.get("/client/all", fetchUsersController.fetchByOrganization);
 app.get("/client/export", ExportClientsController.execute);
 
 app.get("/product/all", FetchAllProductsController.fetchAll)
-app.post("product/create", CreateProductController.execute)
+app.post("/product/create", CreateProductWithAttributesController.execute)
 app.get("/product/export", ExportProductsController.execute);
-
 app.put("/product/:id", UpdateProductController.execute)
 app.delete("/product/:id", DeleteProductController.execute)
 app.get("/product/:id", FetchProductByIdController.execute)

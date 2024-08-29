@@ -1,4 +1,5 @@
 import { ProductValidatorFactory } from "../factory/product-validator.factory";
+import { Attribute } from "../value-objects/attribute";
 
 export class Product {
   private _id: string;
@@ -13,6 +14,8 @@ export class Product {
   private _updatedAt: Date | null;
   private _deletedAt: Date | null;
 
+  private _atributes: Attribute[]
+
   constructor(
     id: string,
     name: string,
@@ -24,7 +27,9 @@ export class Product {
 
     createAt: Date | null = null,
     updatedAt: Date | null = null,
-    deletedAt: Date | null = null
+    deletedAt: Date | null = null,
+
+    atributes: Attribute[] = [],
   ) {
     this._id = id;
     this._name = name;
@@ -37,6 +42,8 @@ export class Product {
     this._createdAt = createAt
     this._updatedAt = updatedAt
     this._deletedAt = deletedAt
+
+    this._atributes = atributes
 
     this.validate()
   }
@@ -83,5 +90,9 @@ export class Product {
 
   get deletedAt(): Date | null {
     return this._deletedAt
+  }
+
+  get attributes(): Attribute[] {
+    return this._atributes
   }
 }
