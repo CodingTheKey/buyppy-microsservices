@@ -18,6 +18,7 @@ import { FetchProductByIdController } from "../../interfaces/controllers/product
 import { UpdateProductController } from "../../interfaces/controllers/products/update-product.controller";
 import { ClientRepositoryController } from "../../interfaces/controllers/report/client/client-report.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
+import { Logger } from "../../utils/logger.util";
 
 export const app = new Hono();
 
@@ -29,6 +30,26 @@ app.use(
     allowHeaders: ['Content-Type', 'Authorization'],
   })
 );
+
+const logflareClient = new Logger('YOUR_LOGFLARE_API_KEY', 'YOUR_SOURCE_ID');
+
+app.use('*', async (ctx, next) => {
+  const startTime = Date.now();
+
+  await next();
+
+  const duration = Date.now() - startTime;
+  const logData = {
+    method: ctx.req.method,
+    path: ctx.req.path,
+    status: ctx.res.status,
+    duration,
+    headers: ctx.req.headers,
+  };
+
+  await logflareClient.sendLog(ctx, logData);
+});
+
 
 const registerUserController = new RegisterUserController();
 const fetchUsersController = new FetchByOrganizationController();
