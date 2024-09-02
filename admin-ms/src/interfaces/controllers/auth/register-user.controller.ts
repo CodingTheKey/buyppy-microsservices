@@ -21,12 +21,12 @@ export class RegisterUserController {
 					city: input.address.city,
 					street: input.address.street,
 					number: input.address.number,
-					zip_code: input.address.zip_code,
+					zipCode: input.address.zipCode,
 				},
 			};
 
-			const usercase = new RegisterUserUseCase(new ClientRepository());
-			const result = await usercase.execute(registerClientDTO);
+			const usecase = new RegisterUserUseCase(new ClientRepository());
+			const result = await usecase.execute(registerClientDTO);
 
 			const response = {
 				data: result,

@@ -17,7 +17,7 @@ export class RegisterUserUseCase {
 			uuid(),
 			input.address.street,
 			input.address.number,
-			input.address.zip_code,
+			input.address.zipCode,
 			input.address.city
 		);
 
