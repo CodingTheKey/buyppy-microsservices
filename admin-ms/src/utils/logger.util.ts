@@ -18,7 +18,7 @@ export class Logger {
         },
         body: JSON.stringify({
           source: this.sourceId,
-          log_entry: logData,
+          log_entry: JSON.stringify(logData),
         }),
       });
 

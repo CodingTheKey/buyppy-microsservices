@@ -31,7 +31,7 @@ app.use(
   })
 );
 
-const logflareClient = new Logger('YOUR_LOGFLARE_API_KEY', 'YOUR_SOURCE_ID');
+const logflareClient = new Logger('5i4Oqb0QQHJ_', '3a0309a4-a418-4d2d-bd38-ee39387ff91f');
 
 app.use('*', async (ctx, next) => {
   const startTime = Date.now();
@@ -44,7 +44,7 @@ app.use('*', async (ctx, next) => {
     path: ctx.req.path,
     status: ctx.res.status,
     duration,
-    headers: ctx.req.headers,
+    headers: ctx.header,
   };
 
   await logflareClient.sendLog(ctx, logData);

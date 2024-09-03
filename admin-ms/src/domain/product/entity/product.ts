@@ -95,4 +95,8 @@ export class Product {
   get attributes(): Attribute[] {
     return this._atributes
   }
+
+  addAttributes(atributes: Attribute[]) {
+    this._atributes = atributes
+  }
 }

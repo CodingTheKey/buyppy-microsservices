@@ -72,19 +72,39 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 	}
 
-	async update(entity: Product): Promise<void> {
-		await prisma.product.update({
-			data: {
-				id: entity.id,
-				category: entity.category,
-				code: entity.code,
-				cost: entity.cost,
-				name: entity.name,
-				price: entity.price,
-				promotionalPrice: entity.promotionalPrice
-			},
-			where: {
-				id: entity.id
+	async update(product: Product): Promise<void> {
+		await prisma.$transaction(async (tx) => {
+			await tx.product.update({
+				data: {
+					category: product.category,
+					code: product.code,
+					cost: product.cost,
+					name: product.name,
+					price: product.price,
+					promotionalPrice: product.promotionalPrice
+				},
+				where: {
+					id: product.id
+				}
+			})
+
+			for (const a of product.attributes) {
+				await tx.productAttribute.update({
+					where: {
+						id: a.id,
+					},
+					data: {
+						value: a.value,
+					},
+				})
+				await tx.productStock.update({
+					where: {
+						id: a.stockId ?? '',
+					},
+					data: {
+						quantity: a.stockQuantity
+					}
+				})
 			}
 		})
 	}
