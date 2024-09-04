@@ -1,8 +1,8 @@
 import { v4 as uuid } from "uuid";
+import type { ClientRepositoryInterface } from "../../../../application/client/repository/prisma/client-repository.interface";
 import Client from "../../../../domain/client/entity/client";
 import { UserMapper } from "../../../../domain/client/mapper";
 import { Address } from "../../../../domain/client/value-object/address";
-import type { ClientRepositoryInterface } from "../../../../infra/client/repository/prisma/client-repository.interface";
 import type { RegisterClientDTO } from "./register-client.dto";
 
 export class RegisterUserUseCase {

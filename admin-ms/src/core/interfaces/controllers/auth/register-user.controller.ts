@@ -1,8 +1,8 @@
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import type { Context } from "../../../../types";
+import { ClientRepository } from "../../../application/repositories/client/repository/prisma/client.repository";
 import type { RegisterClientDTO } from "../../../application/use-case/client/create/register-client.dto";
 import { RegisterUserUseCase } from "../../../application/use-case/client/create/register-client.usecase";
-import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
 
 export class RegisterUserController {
   @HTTPExceptionHandler()

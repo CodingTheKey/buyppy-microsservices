@@ -1,4 +1,4 @@
-import { OrderRepositoryInterface } from "../../../../infra/order/repository/order-repository.interface";
+import { OrderRepositoryInterface } from "../../../../application/order/repository/order-repository.interface";
 import { InputCancelOrderDTO } from "./input-cancel-order.dto";
 
 export class CancelOrderUseCase {

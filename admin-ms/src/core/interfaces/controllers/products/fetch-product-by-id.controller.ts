@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import { FetchProductByIdUseCase } from "../../../application/use-case/product/fetch/fetch-product-by-id.usecase";
-import { ProductRepository } from "../../../infra/product/repository/prisma/product.repository";
+import { ProductRepository } from "../../../application/repositories/product/repository/prisma/product.repository";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class FetchProductByIdController {

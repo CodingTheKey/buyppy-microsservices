@@ -1,4 +1,4 @@
-import { ClientRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface"
+import { ClientRepositoryInterface } from "../../../application/client/repository/prisma/client-repository.interface"
 
 export class FetchMonthlyClientsReport {
   private clientRepository: ClientRepositoryInterface

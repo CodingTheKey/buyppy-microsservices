@@ -1,6 +1,6 @@
+import { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface"
 import { AttributeFactory } from "../../../../domain/product/factory/create-attribute.factory"
 import { ProductAtributeFactory } from "../../../../domain/product/factory/product-attribute.factory"
-import { ProductRepositoryInterface } from "../../../../infra/product/repository/prisma/product-repository.interface"
 import { InputCreateProductWithAttributesDTO } from "./input.create-product-with-attributes.dto"
 
 export class CreateProductWithAttributesUseCase {

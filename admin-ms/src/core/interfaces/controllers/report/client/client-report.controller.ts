@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../../decorators/http-exceptions-handler.decorator";
 import { ClientReportUseCase } from "../../../../application/use-case/report/client-report.usecase";
-import { ClientRepository } from "../../../../infra/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../../application/repositories/client/repository/prisma/client.repository";
 
 export class ClientRepositoryController {
   @HTTPExceptionHandler()

@@ -1,8 +1,8 @@
 import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
+import { ProductRepository } from "../../../application/product/repository/prisma/product.repository";
 import { CreateProductUseCase } from "../../../application/use-case/product/create/create-product.usecase";
 import type { InputCreateProductDTO } from "../../../application/use-case/product/create/input-create-product.dto";
-import { ProductRepository } from "../../../infra/product/repository/prisma/product.repository";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class CreateProductController {

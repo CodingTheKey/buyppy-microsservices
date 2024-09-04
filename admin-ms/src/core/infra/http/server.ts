@@ -50,7 +50,6 @@ app.use('*', async (ctx, next) => {
   await logflareClient.sendLog(ctx, logData);
 });
 
-
 const registerUserController = new RegisterUserController();
 const fetchUsersController = new FetchByOrganizationController();
 

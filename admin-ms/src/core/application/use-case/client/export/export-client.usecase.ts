@@ -1,6 +1,6 @@
 import Excel from "exceljs";
+import { ClientRepository } from "../../../../application/client/repository/prisma/client.repository";
 import Client from "../../../../domain/client/entity/client";
-import { ClientRepository } from "../../../../infra/client/repository/prisma/client.repository";
 
 export class ExportClientsUseCase {
   private readonly clientRepository: ClientRepository;

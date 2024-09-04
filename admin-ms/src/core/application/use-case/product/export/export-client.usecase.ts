@@ -1,6 +1,6 @@
 import Excel from "exceljs";
+import { ProductRepository } from "../../../../application/product/repository/prisma/product.repository";
 import { Product } from "../../../../domain/product/entity/product";
-import { ProductRepository } from "../../../../infra/product/repository/prisma/product.repository";
 
 export class ExportProductsUseCase {
   private readonly productRepository: ProductRepository;

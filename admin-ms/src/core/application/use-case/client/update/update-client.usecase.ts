@@ -1,6 +1,6 @@
+import type { ClientRepositoryInterface } from "../../../../application/client/repository/prisma/client-repository.interface";
 import Client from "../../../../domain/client/entity/client";
 import { Address } from "../../../../domain/client/value-object/address";
-import type { ClientRepositoryInterface } from "../../../../infra/client/repository/prisma/client-repository.interface";
 import type { InputUpdateClientDTO } from "./input-update-client.dto";
 
 export class UpdateClientUseCase {

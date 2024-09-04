@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { Product } from "../../../../domain/product/entity/product";
-import { Attribute } from "../../../../domain/product/value-objects/attribute";
-import { prisma } from "../../../db/prisma/primsa";
+import { Product } from '../../../../../domain/product/entity/product';
+import { Attribute } from '../../../../../domain/product/value-objects/attribute';
+import { prisma } from '../../../../../infra/db/prisma/primsa';
 import type { ProductRepositoryInterface } from "./product-repository.interface";
 
 export class ProductRepository implements ProductRepositoryInterface {

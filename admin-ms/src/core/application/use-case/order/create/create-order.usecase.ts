@@ -1,5 +1,5 @@
+import { OrderRepositoryInterface } from "../../../../application/order/repository/order-repository.interface"
 import { OrderFactory } from "../../../../domain/order/factory/order.factory"
-import { OrderRepositoryInterface } from "../../../../infra/order/repository/order-repository.interface"
 import { InputCreateOrderDTO } from "./input-create-order.dto"
 
 export class CreateOrderUseCase {

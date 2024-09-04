@@ -1,4 +1,4 @@
-import type { ClientRepositoryInterface } from "../../../../infra/client/repository/prisma/client-repository.interface";
+import type { ClientRepositoryInterface } from "../../../../application/client/repository/prisma/client-repository.interface";
 
 export class DeleteClientUseCase {
   private clientRepository: ClientRepositoryInterface

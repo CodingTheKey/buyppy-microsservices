@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { ClientRepositoryInterface } from "../../../infra/client/repository/prisma/client-repository.interface"
+import { ClientRepositoryInterface } from "../../../application/client/repository/prisma/client-repository.interface"
 
 export class ClientReportUseCase {
   private clientRepository: ClientRepositoryInterface

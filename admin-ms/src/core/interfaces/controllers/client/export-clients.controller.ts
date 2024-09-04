@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import { ExportClientsUseCase } from "../../../application/use-case/client/export/export-client.usecase";
-import { ClientRepository } from "../../../infra/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../application/repositories/client/repository/prisma/client.repository";
 
 export class ExportClientsController {
   @HTTPExceptionHandler("Failed to export clients")

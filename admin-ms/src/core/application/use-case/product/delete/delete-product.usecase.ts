@@ -1,4 +1,4 @@
-import type { ProductRepositoryInterface } from "../../../../infra/product/repository/prisma/product-repository.interface";
+import type { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface";
 import type { InputDeleteProductDTO } from "./input-delete-product.dto";
 
 export class DeleteProductUseCase {

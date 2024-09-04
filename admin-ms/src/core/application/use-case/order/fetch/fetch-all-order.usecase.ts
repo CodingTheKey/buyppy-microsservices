@@ -1,5 +1,5 @@
+import { OrderRepositoryInterface } from "../../../../application/order/repository/order-repository.interface"
 import { OrderMapper } from "../../../../domain/order/mapper"
-import { OrderRepositoryInterface } from "../../../../infra/order/repository/order-repository.interface"
 
 export class FetchAllOrdersUseCase {
   private orderRepository: OrderRepositoryInterface

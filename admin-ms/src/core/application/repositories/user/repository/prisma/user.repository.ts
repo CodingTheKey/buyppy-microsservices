@@ -1,5 +1,5 @@
-import { User } from "../../../../domain/user/entity/User";
-import { prisma } from "../../../db/prisma/primsa";
+import { User } from "../../../../../domain/user/entity/User";
+import { prisma } from "../../../../../infra/db/prisma/primsa";
 import type { UserRepositoryInterface } from "./user-repository.interface";
 
 export class UserRepository implements UserRepositoryInterface {

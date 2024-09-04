@@ -1,5 +1,5 @@
+import type { ClientRepositoryInterface } from "../../../../application/client/repository/prisma/client-repository.interface";
 import { UserMapper } from "../../../../domain/client/mapper";
-import type { ClientRepositoryInterface } from "../../../../infra/client/repository/prisma/client-repository.interface";
 
 export class FetchUserByOrganizationUseCase {
 	private userRepository: ClientRepositoryInterface;

@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import { FetchAllOrdersUseCase } from "../../../application/use-case/order/fetch/fetch-all-order.usecase";
-import { PrismaOrderRepository } from "../../../infra/order/repository/prisma/prisma-order-repository";
+import { PrismaOrderRepository } from "../../../application/repositories/order/repository/prisma/prisma-order-repository";
 
 export class FetchAllOrderController {
   @HTTPExceptionHandler()

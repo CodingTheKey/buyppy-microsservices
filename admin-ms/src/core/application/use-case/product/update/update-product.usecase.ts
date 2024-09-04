@@ -1,6 +1,6 @@
+import type { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface"
 import { Product } from "../../../../domain/product/entity/product"
 import { Attribute } from "../../../../domain/product/value-objects/attribute"
-import type { ProductRepositoryInterface } from "../../../../infra/product/repository/prisma/product-repository.interface"
 import type { InputUpdateProductDTO } from "./input-update-product.dto"
 
 export class UpdateProductUseCase {
