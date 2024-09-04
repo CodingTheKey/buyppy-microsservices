@@ -11,12 +11,13 @@ export class ProductMapper {
       category: entity.category,
       price: entity.price,
       promotionalPrice: entity.promotionalPrice,
-      stockQuantity: 10,
-      attribute: "attribute",
-
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-      deletedAt: entity.deletedAt
+      
+      attribute: entity.attributes.map((a) => ({
+        id: a.id,
+        key: a.key,
+        value: a.value,
+        stockQuantity: a.stockQuantity
+      })),
     }
   }
 }

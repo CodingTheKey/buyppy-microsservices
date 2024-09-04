@@ -10,11 +10,7 @@ export class Product {
   private _promotionalPrice: number | null;
   private _category: string;
 
-  private _createdAt: Date | null;
-  private _updatedAt: Date | null;
-  private _deletedAt: Date | null;
-
-  private _atributes: Attribute[]
+  private _attributes: Attribute[]
 
   constructor(
     id: string,
@@ -25,11 +21,7 @@ export class Product {
     promotionalPrice: number | null,
     category: string,
 
-    createAt: Date | null = null,
-    updatedAt: Date | null = null,
-    deletedAt: Date | null = null,
-
-    atributes: Attribute[] = [],
+    attributes: Attribute[] = [],
   ) {
     this._id = id;
     this._name = name;
@@ -38,12 +30,7 @@ export class Product {
     this._price = price;
     this._promotionalPrice = promotionalPrice;
     this._category = category;
-
-    this._createdAt = createAt
-    this._updatedAt = updatedAt
-    this._deletedAt = deletedAt
-
-    this._atributes = atributes
+    this._attributes = attributes
 
     this.validate()
   }
@@ -80,23 +67,11 @@ export class Product {
     return this._category;
   }
 
-  get createdAt(): Date | null {
-    return this._createdAt
-  }
-
-  get updatedAt(): Date | null {
-    return this._updatedAt
-  }
-
-  get deletedAt(): Date | null {
-    return this._deletedAt
-  }
-
   get attributes(): Attribute[] {
-    return this._atributes
+    return this._attributes
   }
 
   addAttributes(atributes: Attribute[]) {
-    this._atributes = atributes
+    this._attributes = atributes
   }
 }

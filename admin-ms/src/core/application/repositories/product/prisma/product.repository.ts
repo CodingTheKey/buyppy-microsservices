@@ -37,9 +37,6 @@ export class ProductRepository implements ProductRepositoryInterface {
 			p.price,
 			p.promotionalPrice,
 			p.category,
-			p.createdAt,
-			p.updatedAt,
-			p.deletedAt,
 			p.attributes.map((a) => new Attribute(
 				a.id,
 				a.attribute.key,
@@ -153,10 +150,6 @@ export class ProductRepository implements ProductRepositoryInterface {
 			model.price,
 			model.promotionalPrice,
 			model.category,
-
-			model.createdAt,
-			model.updatedAt,
-			model.deletedAt
 		)
 
 		const attributes = await prisma.productAttribute.findMany({

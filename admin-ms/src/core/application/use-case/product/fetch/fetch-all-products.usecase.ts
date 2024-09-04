@@ -19,7 +19,8 @@ export class FetchAllProductsUseCase {
       p.cost,
       p.price,
       p.promotionalPrice,
-      p.category
+      p.category,
+      p.attributes
     ))
 
     const raw = products.map((p) => ProductMapper.execute(p))
