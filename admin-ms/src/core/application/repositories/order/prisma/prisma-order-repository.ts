@@ -1,8 +1,7 @@
-
-import { Order } from "../../../../../domain/order/entity/order";
-import { OrderMapper } from "../../../../../domain/order/mapper";
-import { OrderItem } from "../../../../../domain/order/value-objects/order-item";
-import { prisma } from "../../../../../infra/db/prisma/primsa";
+import { Order } from "../../../../domain/order/entity/order";
+import { OrderMapper } from "../../../../domain/order/mapper";
+import { OrderItem } from "../../../../domain/order/value-objects/order-item";
+import { prisma } from "../../../../infra/db/prisma/primsa";
 import { OrderRepositoryInterface } from "../order-repository.interface";
 
 export class PrismaOrderRepository implements OrderRepositoryInterface {
