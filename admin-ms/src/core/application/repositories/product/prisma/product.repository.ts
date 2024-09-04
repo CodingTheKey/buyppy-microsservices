@@ -9,7 +9,25 @@ export class ProductRepository implements ProductRepositoryInterface {
 		throw new Error("Method not implemented.");
 	}
 	async findAll(): Promise<Product[]> {
-		const model = await prisma.product.findMany()
+		const model = await prisma.product.findMany({
+			include: {
+				attributes: {
+					include: {
+						ProductStock: {
+							select: {
+								productAttributeId: true,
+								quantity: true
+							}
+						},
+						attribute: {
+							select: {
+								key: true,
+							}
+						},
+					}
+				},
+			}
+		})
 
 		const products = model.map((p) => new Product(
 			p.id,
@@ -18,7 +36,16 @@ export class ProductRepository implements ProductRepositoryInterface {
 			p.cost,
 			p.price,
 			p.promotionalPrice,
-			p.category
+			p.category,
+			p.createdAt,
+			p.updatedAt,
+			p.deletedAt,
+			p.attributes.map((a) => new Attribute(
+				a.id,
+				a.attribute.key,
+				a.value,
+				a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
+			)
 		))
 
 		return products
