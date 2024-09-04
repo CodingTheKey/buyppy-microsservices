@@ -11,6 +11,8 @@ export class FetchProductByIdUseCase {
   async execute(id: string) {
     const product = await this.productRepository.find(id)
 
-    return ProductMapper.execute(product)
+    const output = ProductMapper.execute(product)
+
+    return output
   }
 }

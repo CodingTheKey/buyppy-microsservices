@@ -137,10 +137,29 @@ export class ProductRepository implements ProductRepositoryInterface {
 		const model = await prisma.product.findFirst({
 			where: {
 				id
+			},
+			include: {
+				attributes: {
+					include: {
+						ProductStock: {
+							select: {
+								productAttributeId: true,
+								quantity: true
+							}
+						},
+						attribute: {
+							select: {
+								key: true,
+							}
+						},
+					}
+				},
 			}
 		})
 
 		if (!model) throw new Error("Product not found")
+
+		console.log(model.attributes)
 
 		const product = new Product(
 			model.id,
@@ -150,6 +169,12 @@ export class ProductRepository implements ProductRepositoryInterface {
 			model.price,
 			model.promotionalPrice,
 			model.category,
+			model.attributes.map((a) => new Attribute(
+				a.id,
+				a.attribute.key,
+				a.value,
+				a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
+			)
 		)
 
 		const attributes = await prisma.productAttribute.findMany({
