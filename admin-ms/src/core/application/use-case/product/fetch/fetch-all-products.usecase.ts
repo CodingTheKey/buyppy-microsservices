@@ -1,6 +1,6 @@
-import type { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface";
 import { Product } from "../../../../domain/product/entity/product";
 import { ProductMapper } from "../../../../domain/product/mapper";
+import { ProductRepositoryInterface } from "../../../repositories/product/product-repository.interface";
 
 export class FetchAllProductsUseCase {
   private productRepository: ProductRepositoryInterface
