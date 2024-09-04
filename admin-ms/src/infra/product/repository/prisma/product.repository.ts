@@ -132,6 +132,12 @@ export class ProductRepository implements ProductRepositoryInterface {
 			model.deletedAt
 		)
 
+		const attributes = await prisma.productAttribute.findMany({
+			where: {
+				productId: model.id
+			}
+		})
+
 		return product
 	}
 

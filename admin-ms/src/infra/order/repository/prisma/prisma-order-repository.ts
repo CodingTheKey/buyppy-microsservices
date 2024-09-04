@@ -6,25 +6,54 @@ import { OrderRepositoryInterface } from "../order-repository.interface";
 
 export class PrismaOrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
-    await prisma.order.create({
-      data: {
-        id: entity.id,
-        clientId: entity.clientId,
-        status: entity.status,
+    await prisma.$transaction(async (tx) => {
+      await tx.order.create({
+        data: {
+          id: entity.id,
+          clientId: entity.clientId,
+          status: entity.status,
 
-        items: {
-          create: entity.items.map((i) => ({
-            id: i.id,
-            price: i.price,
-            productId: i.productId,
-            quantity: i.quantity,
-            createdAt: new Date(),
-          }))
-        },
+          items: {
+            create: entity.items.map((i) => ({
+              id: i.id,
+              price: i.price,
+              productId: i.productId,
+              quantity: i.quantity,
+              createdAt: new Date(),
+            }))
+          },
 
-        total: entity.total,
+          total: entity.total,
 
-        createdAt: new Date(),
+          createdAt: new Date(),
+        }
+      })
+
+      for (const i of entity.items) {
+        const productStock = await tx.productStock.findFirst({
+          where: {
+            productAttributeId: i.productAttributeId ?? ''
+          }
+        })
+
+        if (!productStock) {
+          throw new Error('Product stock not found.');
+        }
+
+        if (productStock.quantity < i.quantity) {
+          throw new Error('Product stock not enough.');
+        }
+
+        await tx.productStock.update({
+          where: {
+            id: productStock?.id
+          },
+          data: {
+            quantity: {
+              decrement: i.quantity
+            }
+          }
+        })
       }
     })
   }
@@ -47,9 +76,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         canceledAt: order.canceledAt,
         cancelReason: order.canceleReason,
 
-        createdAt: order.createdAt ?? new Date(),
         updatedAt: new Date(),
-        deletedAt: order.deletedAt,
       }
     })
   }
@@ -76,7 +103,6 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       i.productId,
       i.quantity,
       i.price,
-      i.createdAt
     ))
     const order = new Order(
       model.id,
@@ -85,13 +111,8 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       model.total,
       items,
       model.client.name,
-      model.refundedAt,
       model.refundReason,
-      model.canceledAt,
       model.cancelReason,
-      model.createdAt,
-      model.updatedAt,
-      model.deletedAt
     )
 
     return order
@@ -115,7 +136,6 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         i.productId,
         i.quantity,
         i.price,
-        i.createdAt
       ))
       const order = new Order(
         o.id,
@@ -124,13 +144,8 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         o.total,
         items,
         o.client.name,
-        o.refundedAt,
         o.refundReason,
-        o.canceledAt,
         o.cancelReason,
-        o.createdAt,
-        o.updatedAt,
-        o.deletedAt
       )
 
       return order

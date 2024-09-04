@@ -7,8 +7,7 @@ export class OrderItemFactory {
     productId: string,
     quantity: number,
     price: number,
-
-    createdAt: Date,
+    productAttributeId: string | null = null,
   ): OrderItem {
     return new OrderItem(
       uuid(),
@@ -16,8 +15,7 @@ export class OrderItemFactory {
       productId,
       quantity,
       price,
-
-      createdAt,
+      productAttributeId
     )
   }
 }

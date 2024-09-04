@@ -9,8 +9,6 @@ export class OrderItemZodValidator implements ValidatorInterface<OrderItem> {
     productId: z.string(),
     quantity: z.number(),
     price: z.number(),
-
-    createdAt: z.date(),
   });
 
 	validate(entity: OrderItem) {

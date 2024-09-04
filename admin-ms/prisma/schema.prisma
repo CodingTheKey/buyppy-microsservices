@@ -113,7 +113,7 @@ model ProductAttribute {
 model ProductStock {
   id                 String           @id @default(uuid())
   productAttributeId String           @map("product_attribute_id")
-  quantity           Int              @default(0)
+  quantity           Int              @unique @default(0)
   productAttribute   ProductAttribute @relation(fields: [productAttributeId], references: [id])
 
   createdAt DateTime  @default(now()) @map("created_at")

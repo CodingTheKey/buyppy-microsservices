@@ -6,8 +6,7 @@ export class OrderItem extends Entity {
   private _productId: string
   private _quantity: number
   private _price: number
-
-  private _createdAt: Date
+  private _productAttributeId: string | null
 
   constructor(
     id: string,
@@ -15,8 +14,7 @@ export class OrderItem extends Entity {
     productId: string,
     quantity: number,
     price: number,
-
-    createdAt: Date,
+    productAttributeId: string | null = null,
   ) {
     super()
 
@@ -26,7 +24,7 @@ export class OrderItem extends Entity {
     this._quantity = quantity
     this._price = price
 
-    this._createdAt = createdAt
+    this._productAttributeId = productAttributeId
 
     this.validate()
   }
@@ -51,7 +49,7 @@ export class OrderItem extends Entity {
     return this._price;
   }
 
-  get createdAt(): Date {
-    return this._createdAt;
+  get productAttributeId(): string | null {
+    return this._productAttributeId;
   }
 }

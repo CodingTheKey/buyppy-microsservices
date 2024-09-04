@@ -11,6 +11,7 @@ export class OrderFactory {
       productId: string,
       quantity: number,
       price: number,
+      productAttributeId: string,
     }>,
   ): Order {
     const orderId = uuid()
@@ -19,8 +20,7 @@ export class OrderFactory {
       i.productId,
       i.quantity,
       i.price,
-
-      new Date(),
+      i.productAttributeId
     ))
     return new Order(
       orderId,

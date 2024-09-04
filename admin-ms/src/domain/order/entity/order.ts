@@ -7,18 +7,9 @@ export class Order extends Entity {
   private _status: string | null
   private _total: number
   private _items: OrderItem[]
-
-	private _clientName: string
-
-  private _refundedAt: Date | null
+	private _clientName: string | null
   private _refundReason: string | null
-
-  private _canceledAt: Date | null
   private _canceleReason: string | null
-
-  private _createdAt: Date | null
-  private _updatedAt: Date | null
-  private _deletedAt: Date | null
 
   constructor(
     id: string,
@@ -27,17 +18,11 @@ export class Order extends Entity {
     total: number,
     items: OrderItem[],
 
-    clientName: string,
+    clientName: string | null = null,
 
-    refundedAt: Date | null = null,
     refundReason: string | null = null,
 
-    canceledAt: Date | null = null,
     canceleReason: string | null = null,
-
-    createdAt: Date | null = null,
-    updatedAt: Date | null = null,
-    deletedAt: Date | null = null,
   ) {
     super()
     this._id = id
@@ -47,16 +32,9 @@ export class Order extends Entity {
     this._items = items
     this._clientName = clientName
 
-    this._refundedAt = refundedAt
     this._refundReason = refundReason
 
-    this._canceledAt = canceledAt
     this._canceleReason = canceleReason
-
-    this._createdAt = createdAt
-    this._updatedAt = updatedAt
-    this._deletedAt = deletedAt
-
     this.validate()
   }
 
@@ -65,7 +43,6 @@ export class Order extends Entity {
   }
 
   cancelOrder(reason: string) {
-    this._canceledAt = new Date()
     this._canceleReason = reason
   }
 
@@ -85,35 +62,15 @@ export class Order extends Entity {
     return this._items;
   }
 
-  get clientName(): string {
+  get clientName(): string | null {
     return this._clientName
-  }
-
-  get refundedAt(): Date | null {
-    return this._refundedAt;
   }
 
   get refundReason(): string | null {
     return this._refundReason;
   }
 
-  get canceledAt(): Date | null {
-    return this._canceledAt;
-  }
-
   get canceleReason(): string | null {
     return this._canceleReason;
-  }
-
-  get createdAt(): Date | null {
-    return this._createdAt;
-  }
-
-  get updatedAt(): Date | null {
-    return this._updatedAt;
-  }
-
-  get deletedAt(): Date | null {
-    return this._deletedAt;
   }
 }
