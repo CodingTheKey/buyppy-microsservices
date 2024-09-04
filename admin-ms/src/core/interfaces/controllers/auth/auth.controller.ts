@@ -1,7 +1,7 @@
 import { HTTPException } from "hono/http-exception";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import type { Context } from "../../../../types";
-import { UserRepository } from "../../../application/repositories/user/repository/prisma/user.repository";
+import { UserRepository } from "../../../application/repositories/user/prisma/user.repository";
 import type { InputAuthenticateUserDTO } from "../../../application/use-case/user/auth/auth-user.dto";
 import { AuthenticateUserUseCase } from "../../../application/use-case/user/auth/authenticate-user.usercase";
 // import { UserRepository } from "../../../application/user/repository/prisma/user.repository";

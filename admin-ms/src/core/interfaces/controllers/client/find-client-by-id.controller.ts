@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
+import { ClientRepository } from "../../../application/repositories/client/prisma/client.repository";
 import { FindClientUseCase } from "../../../application/use-case/client/find/find-client.usecase";
-import { ClientRepository } from "../../../application/repositories/client/repository/prisma/client.repository";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class FindClientByIdController {

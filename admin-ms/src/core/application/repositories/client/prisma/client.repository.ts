@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
-import Client from "../../../../../domain/client/entity/client";
-import { Address } from "../../../../../domain/client/value-object/address";
-import { prisma } from "../../../../../infra/db/prisma/primsa";
-import type { ClientRepositoryInterface } from "./client-repository.interface";
+import Client from "../../../../domain/client/entity/client";
+import { Address } from "../../../../domain/client/value-object/address";
+import { prisma } from "../../../../infra/db/prisma/primsa";
+import type { ClientRepositoryInterface } from "../client-repository.interface";
 
 export class ClientRepository implements ClientRepositoryInterface {
 	async fetchByOrganizationId(organization_id: string): Promise<Client[]> {

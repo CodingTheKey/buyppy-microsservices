@@ -1,7 +1,7 @@
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator";
 import type { Context } from "../../../../types";
 import { UrlParamsToObject } from "../../../../utils/url-params-to-object";
-import { ClientRepository } from "../../../application/repositories/client/repository/prisma/client.repository";
+import { ClientRepository } from "../../../application/repositories/client/prisma/client.repository";
 import { FetchUserByOrganizationUseCase } from "../../../application/use-case/client/fetchByOrganization/fetchByOrganization.usecase";
 
 export interface FetchUsersByOrganizationDTO {
