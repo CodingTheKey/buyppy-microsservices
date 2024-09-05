@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Logger } from "../../../utils/logger.util";
+import { CreateAttributeController } from "../../interfaces/controllers/attributes/create-attribute.controller";
 import { FetchAllAttributesController } from "../../interfaces/controllers/attributes/fetch-all-attributes.controller";
 import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
@@ -79,7 +80,8 @@ app.patch("/order/cancel/:id", CancelOrderController.execute)
 app.get("/order/all", FetchAllOrderController.execute)
 app.get("/order/:id", FindOrderController.execute)
 
-app.get("/attributes", FetchAllAttributesController.execute)
+app.get("/attribute", FetchAllAttributesController.execute)
+app.post("/attribute/create", CreateAttributeController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

@@ -11,7 +11,7 @@ export class ProductMapper {
       category: entity.category,
       price: entity.price,
       promotionalPrice: entity.promotionalPrice,
-      
+
       attribute: entity.attributes.map((a) => ({
         id: a.id,
         key: a.key,
