@@ -12,6 +12,8 @@ export class Product {
 
   private _attributes: Attribute[]
 
+  private _createdAt: Date | null
+
   constructor(
     id: string,
     name: string,
@@ -73,5 +75,9 @@ export class Product {
 
   addAttributes(atributes: Attribute[]) {
     this._attributes = atributes
+  }
+
+  setCreatedAt(createdAt: Date | null) {
+    this._createdAt = createdAt
   }
 }
