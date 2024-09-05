@@ -18,6 +18,8 @@ export class ProductMapper {
         value: a.value,
         stockQuantity: a.stockQuantity
       })),
+
+      createdAt: entity.createdAt
     }
   }
 }

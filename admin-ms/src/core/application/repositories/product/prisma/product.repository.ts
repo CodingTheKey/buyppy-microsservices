@@ -29,21 +29,27 @@ export class ProductRepository implements ProductRepositoryInterface {
 			}
 		})
 
-		const products = model.map((p) => new Product(
-			p.id,
-			p.name,
-			p.code,
-			p.cost,
-			p.price,
-			p.promotionalPrice,
-			p.category,
-			p.attributes.map((a) => new Attribute(
-				a.id,
-				a.attribute.key,
-				a.value,
-				a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
+		const products = model.map((p) => {
+			const product = new Product(
+				p.id,
+				p.name,
+				p.code,
+				p.cost,
+				p.price,
+				p.promotionalPrice,
+				p.category,
+				p.attributes.map((a) => new Attribute(
+					a.id,
+					a.attribute.key,
+					a.value,
+					a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
+				)
 			)
-		))
+
+			product.setCreatedAt(p.createdAt)
+
+			return product
+		})
 
 		return products
 	}
@@ -158,8 +164,6 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 
 		if (!model) throw new Error("Product not found")
-
-		console.log(model.attributes)
 
 		const product = new Product(
 			model.id,
