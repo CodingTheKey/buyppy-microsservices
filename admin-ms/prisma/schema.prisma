@@ -70,19 +70,21 @@ model Coupon {
 }
 
 model Product {
-  id               String             @id @default(uuid())
+  id               String  @id @default(uuid())
   name             String
-  code             String             @unique
+  code             String  @unique
   cost             Float
   price            Float
-  promotionalPrice Float?             @map("promotional_price")
-  category         String
-  attributes       ProductAttribute[]
-  orderItems       OrderItem[]
+  promotionalPrice Float?  @map("promotional_price")
+  categoryId       String?
 
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
+
+  attributes ProductAttribute[]
+  orderItems OrderItem[]
+  Category   Category?          @relation(fields: [categoryId], references: [id])
 
   @@map("products")
 }
@@ -106,6 +108,7 @@ model ProductAttribute {
 
   createdAt    DateTime       @default(now()) @map("created_at")
   ProductStock ProductStock[]
+  categoryId   String?
 
   @@map("product_attributes")
 }
@@ -155,4 +158,13 @@ model OrderItem {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("order_items")
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  title     String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  Product   Product[]
+
+  @@map("categories")
 }
