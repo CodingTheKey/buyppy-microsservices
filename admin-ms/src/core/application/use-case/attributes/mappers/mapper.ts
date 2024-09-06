@@ -5,7 +5,7 @@ export class AttributesMapper {
   static execute(a: Attribute) {
     return {
       id: a.id,
-      key: a.key,
+      title: a.key,
     }
   }
 }
