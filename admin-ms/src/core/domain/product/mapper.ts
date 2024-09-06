@@ -8,7 +8,7 @@ export class ProductMapper {
       name: entity.name,
       code: entity.code,
       cost: entity.cost,
-      category: entity.category,
+      categoryId: entity.categoryId,
       price: entity.price,
       promotionalPrice: entity.promotionalPrice,
 
