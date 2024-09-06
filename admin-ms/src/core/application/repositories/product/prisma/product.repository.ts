@@ -11,6 +11,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 	async findAll(): Promise<Product[]> {
 		const model = await prisma.product.findMany({
 			include: {
+				Category: true,
 				attributes: {
 					include: {
 						ProductStock: {
@@ -37,7 +38,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 				p.cost,
 				p.price,
 				p.promotionalPrice,
-				p.category,
+				p.categoryId ?? '',
 				p.attributes.map((a) => new Attribute(
 					a.id,
 					a.attribute.key,
@@ -59,7 +60,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			await tx.product.create({
 				data: {
 					id: product.id,
-					category: product.category,
+					categoryId: product.categoryId,
 					code: product.code,
 					cost: product.cost,
 					name: product.name,
@@ -106,7 +107,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 		await prisma.$transaction(async (tx) => {
 			await tx.product.update({
 				data: {
-					category: product.category,
+					categoryId: product.categoryId,
 					code: product.code,
 					cost: product.cost,
 					name: product.name,
@@ -172,7 +173,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			model.cost,
 			model.price,
 			model.promotionalPrice,
-			model.category,
+			model.categoryId ?? '',
 			model.attributes.map((a) => new Attribute(
 				a.id,
 				a.attribute.key,

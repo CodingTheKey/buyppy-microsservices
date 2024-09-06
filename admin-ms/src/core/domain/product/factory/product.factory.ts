@@ -9,24 +9,23 @@ export class ProductFactory {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    category: string,
+    categoryId: string,
 
     createdAt: Date | null = null,
     updatedAt: Date | null = null,
     deletedAt: Date | null = null,
   ): Product {
-    return new Product(
+    const product =  new Product(
       uuid(),
       name,
       code,
       cost,
       price,
       promotionalPrice,
-      category,
-
-      createdAt,
-      updatedAt,
-      deletedAt
+      categoryId,
     )
+    product.setCreatedAt(createdAt ?? new Date())
+
+    return product
   }
 }

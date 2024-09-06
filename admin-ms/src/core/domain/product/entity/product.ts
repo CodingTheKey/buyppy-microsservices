@@ -8,7 +8,7 @@ export class Product {
   private _cost: number;
   private _price: number;
   private _promotionalPrice: number | null;
-  private _category: string;
+  private _categoryId: string;
 
   private _attributes: Attribute[]
 
@@ -21,7 +21,7 @@ export class Product {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    category: string,
+    categoryId: string,
 
     attributes: Attribute[] = [],
   ) {
@@ -31,7 +31,7 @@ export class Product {
     this._cost = cost;
     this._price = price;
     this._promotionalPrice = promotionalPrice;
-    this._category = category;
+    this._categoryId = categoryId;
     this._attributes = attributes
 
     this.validate()
@@ -65,8 +65,8 @@ export class Product {
     return this._promotionalPrice;
   }
 
-  get category(): string {
-    return this._category;
+  get categoryId(): string {
+    return this._categoryId;
   }
 
   get attributes(): Attribute[] {

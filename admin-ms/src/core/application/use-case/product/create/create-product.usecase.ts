@@ -1,6 +1,6 @@
-import type { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface";
 import { ProductFactory } from "../../../../domain/product/factory/product.factory";
 import { ProductMapper } from "../../../../domain/product/mapper";
+import { ProductRepositoryInterface } from "../../../repositories/product/product-repository.interface";
 import type { InputCreateProductDTO } from "./input-create-product.dto";
 
 export class CreateProductUseCase {
@@ -17,7 +17,7 @@ export class CreateProductUseCase {
       input.cost,
       input.price,
       input.promotionalPrice,
-      input.category,
+      input.categoryId,
     )
 
     await this.productRepository.create(product)

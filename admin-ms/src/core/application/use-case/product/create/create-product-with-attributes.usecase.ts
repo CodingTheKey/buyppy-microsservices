@@ -1,6 +1,6 @@
-import { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface"
 import { AttributeFactory } from "../../../../domain/product/factory/create-attribute.factory"
 import { ProductAtributeFactory } from "../../../../domain/product/factory/product-attribute.factory"
+import { ProductRepositoryInterface } from "../../../repositories/product/product-repository.interface"
 import { InputCreateProductWithAttributesDTO } from "./input.create-product-with-attributes.dto"
 
 export class CreateProductWithAttributesUseCase {
@@ -17,7 +17,7 @@ export class CreateProductWithAttributesUseCase {
       input.cost,
       input.price,
       input.promotionalPrice,
-      input.category,
+      input.categoryId,
       input.attributes.map((a) => AttributeFactory.create(a.id, '', a.value, a.stockQuantity))
     )
 

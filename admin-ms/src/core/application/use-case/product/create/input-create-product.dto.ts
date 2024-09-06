@@ -4,5 +4,5 @@ export type InputCreateProductDTO = {
   cost: number;
   price: number;
   promotionalPrice: number | null;
-  category: string;
+  categoryId: string;
 }
