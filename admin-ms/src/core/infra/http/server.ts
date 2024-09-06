@@ -8,6 +8,7 @@ import { AuthController } from "../../interfaces/controllers/auth/auth.controlle
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
 import { CreateCategoryController } from "../../interfaces/controllers/category/create-category.controller";
 import { FetchAllCategoriesController } from "../../interfaces/controllers/category/fetch-all-categories.controller";
+import { FindCategoryByIdController } from "../../interfaces/controllers/category/find-category-by-id.controller";
 import { DeleteClientController } from "../../interfaces/controllers/client/delete-client.controller";
 import { ExportClientsController } from "../../interfaces/controllers/client/export-clients.controller";
 import { FindClientByIdController } from "../../interfaces/controllers/client/find-client-by-id.controller";
@@ -89,6 +90,8 @@ app.get("/attribute/:id", FindAttributeByIdController.execute)
 
 app.get("/category/all", FetchAllCategoriesController.execute)
 app.post("/category/create", CreateCategoryController.execute)
+
+app.get("/category/:id", FindCategoryByIdController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

@@ -14,8 +14,18 @@ export class CategoryRepository implements CategoryRepositoryInterface {
   update(entity: Category): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  find(id: string): Promise<Category> {
-    throw new Error("Method not implemented.");
+  async find(id: string): Promise<Category> {
+    const model = await prisma.category.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (model === null) throw new Error("Category not found")
+
+    const category = new Category(model.id, model.title)
+
+    return category
   }
   async findAll(): Promise<Category[]> {
     const model = await prisma.category.findMany()
