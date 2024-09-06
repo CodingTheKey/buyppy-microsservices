@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { Logger } from "../../../utils/logger.util";
 import { CreateAttributeController } from "../../interfaces/controllers/attributes/create-attribute.controller";
 import { FetchAllAttributesController } from "../../interfaces/controllers/attributes/fetch-all-attributes.controller";
+import { FindAttributeByIdController } from "../../interfaces/controllers/attributes/find-attribute-by-id.controller";
 import { AuthController } from "../../interfaces/controllers/auth/auth.controller";
 import { RegisterUserController } from "../../interfaces/controllers/auth/register-user.controller";
 import { CreateCategoryController } from "../../interfaces/controllers/category/create-category.controller";
@@ -84,6 +85,7 @@ app.get("/order/:id", FindOrderController.execute)
 
 app.get("/attribute/all", FetchAllAttributesController.execute)
 app.post("/attribute/create", CreateAttributeController.execute)
+app.get("/attribute/:id", FindAttributeByIdController.execute)
 
 app.get("/category/all", FetchAllCategoriesController.execute)
 app.post("/category/create", CreateCategoryController.execute)
