@@ -80,7 +80,7 @@ app.patch("/order/cancel/:id", CancelOrderController.execute)
 app.get("/order/all", FetchAllOrderController.execute)
 app.get("/order/:id", FindOrderController.execute)
 
-app.get("/attribute", FetchAllAttributesController.execute)
+app.get("/attribute/all", FetchAllAttributesController.execute)
 app.post("/attribute/create", CreateAttributeController.execute)
 
 app.get("/", (c) => {
