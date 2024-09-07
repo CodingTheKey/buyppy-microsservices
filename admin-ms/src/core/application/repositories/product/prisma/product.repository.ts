@@ -17,6 +17,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 					include: {
 						ProductStock: {
 							select: {
+								id: true,
 								productAttributeId: true,
 								quantity: true
 							}
@@ -45,8 +46,10 @@ export class ProductRepository implements ProductRepositoryInterface {
 					a.id,
 					a.attribute.key,
 					a.value,
-					a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
-				)
+					a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0,
+					a.attributeId,
+					a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.id
+				))
 			)
 
 			product.setCreatedAt(p.createdAt)
@@ -177,6 +180,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			a.attribute.key,
 			a.value,
 			a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0,
+			a.attributeId,
 			a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.id
 		))
 
