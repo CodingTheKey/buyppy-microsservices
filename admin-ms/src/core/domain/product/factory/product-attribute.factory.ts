@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { Product } from "../entity/product";
 import { Attribute } from "../value-objects/attribute";
+import { Category } from '../value-objects/category';
 
 export class ProductAtributeFactory {
   static create(
@@ -9,7 +10,7 @@ export class ProductAtributeFactory {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    category: string,
+    category: Category,
 
     attributes: Attribute[]
   ) {
@@ -21,9 +22,6 @@ export class ProductAtributeFactory {
       price,
       promotionalPrice,
       category,
-      new Date(),
-      null,
-      null,
       attributes
     )
 

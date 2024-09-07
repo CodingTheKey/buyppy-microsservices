@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { Product } from '../../../../domain/product/entity/product';
 import { Attribute } from '../../../../domain/product/value-objects/attribute';
+import { Category } from '../../../../domain/product/value-objects/category';
 import { prisma } from '../../../../infra/db/prisma/primsa';
 import type { ProductRepositoryInterface } from "../product-repository.interface";
 
@@ -31,6 +32,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 		})
 
 		const products = model.map((p) => {
+			const category = new Category(p.Category?.id ?? '', p.Category?.title ?? '')
 			const product = new Product(
 				p.id,
 				p.name,
@@ -38,7 +40,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 				p.cost,
 				p.price,
 				p.promotionalPrice,
-				p.categoryId ?? '',
+				category,
 				p.attributes.map((a) => new Attribute(
 					a.id,
 					a.attribute.key,
@@ -60,7 +62,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 			await tx.product.create({
 				data: {
 					id: product.id,
-					categoryId: product.categoryId,
+					categoryId: product.category.id,
 					code: product.code,
 					cost: product.cost,
 					name: product.name,
@@ -107,12 +109,12 @@ export class ProductRepository implements ProductRepositoryInterface {
 		await prisma.$transaction(async (tx) => {
 			await tx.product.update({
 				data: {
-					categoryId: product.categoryId,
+					categoryId: product.category.id,
 					code: product.code,
 					cost: product.cost,
 					name: product.name,
 					price: product.price,
-					promotionalPrice: product.promotionalPrice
+					promotionalPrice: product.promotionalPrice,
 				},
 				where: {
 					id: product.id
@@ -146,10 +148,12 @@ export class ProductRepository implements ProductRepositoryInterface {
 				id
 			},
 			include: {
+				Category: true,
 				attributes: {
 					include: {
 						ProductStock: {
 							select: {
+								id: true,
 								productAttributeId: true,
 								quantity: true
 							}
@@ -166,6 +170,16 @@ export class ProductRepository implements ProductRepositoryInterface {
 
 		if (!model) throw new Error("Product not found")
 
+		const category = new Category(model.Category?.id ?? '', model.Category?.title ?? '')
+
+		const productAttributes = model.attributes.map((a) => new Attribute(
+			a.id,
+			a.attribute.key,
+			a.value,
+			a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0,
+			a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.id
+		))
+
 		const product = new Product(
 			model.id,
 			model.name,
@@ -173,13 +187,8 @@ export class ProductRepository implements ProductRepositoryInterface {
 			model.cost,
 			model.price,
 			model.promotionalPrice,
-			model.categoryId ?? '',
-			model.attributes.map((a) => new Attribute(
-				a.id,
-				a.attribute.key,
-				a.value,
-				a.ProductStock.filter((s) => s.productAttributeId === a.id).at(0)?.quantity ?? 0)
-			)
+			category,
+			productAttributes
 		)
 
 		const attributes = await prisma.productAttribute.findMany({

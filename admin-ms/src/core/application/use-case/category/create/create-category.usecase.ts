@@ -1,4 +1,4 @@
-import { CategoryFactory } from "../../../../domain/category/factory/create-category.factory"
+import { CategoryFactory } from "../../../../domain/product/factory/create-category.factory"
 import { CategoryRepositoryInterface } from "../../../repositories/category/category-repository.interface"
 import { InputCreateCategoryDTO } from "./input-create-category.dto"
 

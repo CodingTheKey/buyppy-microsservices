@@ -1,6 +1,7 @@
-import type { ProductRepositoryInterface } from "../../../../application/product/repository/prisma/product-repository.interface"
 import { Product } from "../../../../domain/product/entity/product"
 import { Attribute } from "../../../../domain/product/value-objects/attribute"
+import { Category } from "../../../../domain/product/value-objects/category"
+import { ProductRepositoryInterface } from "../../../repositories/product/product-repository.interface"
 import type { InputUpdateProductDTO } from "./input-update-product.dto"
 
 export class UpdateProductUseCase {
@@ -19,12 +20,9 @@ export class UpdateProductUseCase {
       input.cost ?? oldProduct.cost,
       input.price ?? oldProduct.price,
       input.promotionalPrice ?? oldProduct.promotionalPrice,
-      input.category ?? oldProduct.category,
+      new Category(input.category.id ?? oldProduct.category.id, ''),
+      input.attributes.map((a) => new Attribute(a.id, a.key, a.value, a.stockQuantity, a.stockId))
     )
-
-    const attributes = input.attributes.map((a) => new Attribute(a.id, a.key, a.value, a.stockQuantity, a.stockId))
-
-    product.addAttributes(attributes)
 
     await this.productRepository.update(product)
   }

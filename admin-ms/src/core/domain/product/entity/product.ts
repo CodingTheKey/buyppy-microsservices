@@ -1,5 +1,6 @@
 import { ProductValidatorFactory } from "../factory/product-validator.factory";
 import { Attribute } from "../value-objects/attribute";
+import { Category } from "../value-objects/category";
 
 export class Product {
   private _id: string;
@@ -8,9 +9,11 @@ export class Product {
   private _cost: number;
   private _price: number;
   private _promotionalPrice: number | null;
-  private _categoryId: string;
+  private _category: Category;
 
   private _attributes: Attribute[]
+
+  private _quantity: number = 0
 
   private _createdAt!: Date
 
@@ -21,8 +24,8 @@ export class Product {
     cost: number,
     price: number,
     promotionalPrice: number | null,
-    categoryId: string,
 
+    category: Category,
     attributes: Attribute[] = [],
   ) {
     this._id = id;
@@ -31,15 +34,32 @@ export class Product {
     this._cost = cost;
     this._price = price;
     this._promotionalPrice = promotionalPrice;
-    this._categoryId = categoryId;
+    this._category = category;
     this._attributes = attributes
 
     this.validate()
+    this.calculateQuantity()
   }
 
 	validate() {
 		ProductValidatorFactory.create().validate(this);
 	}
+
+  addAttributes(atributes: Attribute[]) {
+    this._attributes = atributes
+  }
+
+  setCreatedAt(createdAt: Date) {
+    this._createdAt = createdAt
+  }
+
+  calculateQuantity() {
+    const quantity = this._attributes.reduce((acc, curr) => {
+      return acc + curr.stockQuantity
+    }, 0)
+
+    this._quantity = quantity
+  }
 
   get id(): string {
     return this._id;
@@ -65,23 +85,19 @@ export class Product {
     return this._promotionalPrice;
   }
 
-  get categoryId(): string {
-    return this._categoryId;
+  get category(): Category {
+    return this._category;
   }
 
   get attributes(): Attribute[] {
     return this._attributes
   }
 
-  addAttributes(atributes: Attribute[]) {
-    this._attributes = atributes
-  }
-
-  setCreatedAt(createdAt: Date) {
-    this._createdAt = createdAt
-  }
-
   get createdAt(): Date {
     return this._createdAt
+  }
+
+  get quantity(): number {
+    return this._quantity
   }
 }

@@ -1,4 +1,4 @@
-import { Category } from "../../../../domain/category/entity/category";
+import { Category } from "../../../../domain/product/value-objects/category";
 import { prisma } from "../../../../infra/db/prisma/primsa";
 import { CategoryRepositoryInterface } from "../category-repository.interface";
 

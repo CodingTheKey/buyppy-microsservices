@@ -4,7 +4,9 @@ export type InputUpdateProductDTO = {
   cost?: number;
   price?: number;
   promotionalPrice?: number | null;
-  category?: string;
+  category: {
+    id: string
+  };
   attributes: Attribute[]
 }
 

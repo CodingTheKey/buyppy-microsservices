@@ -8,15 +8,22 @@ export class ProductMapper {
       name: entity.name,
       code: entity.code,
       cost: entity.cost,
-      categoryId: entity.categoryId,
+
       price: entity.price,
       promotionalPrice: entity.promotionalPrice,
 
+      quantity: entity.quantity,
+
+      category: {
+        id: entity.category.id,
+        title: entity.category.title
+      },
       attribute: entity.attributes.map((a) => ({
         id: a.id,
         key: a.key,
         value: a.value,
-        stockQuantity: a.stockQuantity
+        stockQuantity: a.stockQuantity,
+        stockId: a.stockId
       })),
 
       createdAt: entity.createdAt

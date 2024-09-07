@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { Category } from "../entity/category";
+import { Category } from "../value-objects/category";
 
 export class CategoryFactory {
   static create(

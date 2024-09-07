@@ -4,7 +4,10 @@ export type InputCreateProductWithAttributesDTO = {
   cost: number;
   price: number;
   promotionalPrice: number | null;
-  categoryId: string;
+  category: {
+    id: string
+    title: string
+  };
   attributes: Array<{
     id: string
     value: "azul",
