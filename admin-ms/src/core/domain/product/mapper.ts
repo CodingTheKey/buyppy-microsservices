@@ -18,7 +18,7 @@ export class ProductMapper {
         id: entity.category.id,
         title: entity.category.title
       },
-      attribute: entity.attributes.map((a) => ({
+      attributes: entity.attributes.map((a) => ({
         id: a.id,
         attributeId: a.attributeId,
         key: a.key,

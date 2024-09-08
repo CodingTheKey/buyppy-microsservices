@@ -45,6 +45,7 @@ export class Order extends Entity {
 
   cancelOrder(reason: string) {
     this._canceleReason = reason
+    this._status = "CANCELED"
   }
 
   setCreatedAt(createdAt: Date | null) {
