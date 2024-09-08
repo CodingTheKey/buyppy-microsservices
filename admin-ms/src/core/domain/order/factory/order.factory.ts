@@ -4,7 +4,7 @@ import { OrderItemFactory } from "./order-item.factory";
 
 export class OrderFactory {
   public static create(
-    clientId: string,
+    clientId: string | null,
     status: string | null,
     total: number,
     items: Array<{

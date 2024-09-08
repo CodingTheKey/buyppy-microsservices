@@ -9,7 +9,7 @@ export class OrderZodValidator implements ValidatorInterface<Order> {
 
 		const orderSchema = z.object({
       id: z.string(),
-      clientId: z.string(),
+      // clientId: z.string(),
       status: z.string().nullable(),
       total: z.number(),
       items: z.array(orderItem.orderItemSchema),

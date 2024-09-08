@@ -1,5 +1,5 @@
 export type InputCreateOrderDTO = {
-  clientId: string,
+  clientId: string | null,
   productAttributeId: string,
   status: string,
   items:  Array<{

@@ -26,8 +26,6 @@ export class OrderMapper {
       canceleReason: order.canceleReason,
 
       createdAt: order.createdAt,
-      updatedAt: order.updatedAt,
-      deletedAt: order.deletedAt,
     }
   }
 }

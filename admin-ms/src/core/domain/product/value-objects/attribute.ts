@@ -4,7 +4,7 @@ export class Attribute extends Entity {
   private _key: string
   private _value: string
   private _stockQuantity: number
-  private _productAttributeId: string
+  private _attributeId: string
   private _stockId: string | null
 
   constructor (
@@ -12,7 +12,7 @@ export class Attribute extends Entity {
     key: string,
     value: string,
     stockQuantity: number,
-    productAttributeId: string,
+    attributeId: string,
     stockId: string | null = null
   ) {
     super()
@@ -21,7 +21,7 @@ export class Attribute extends Entity {
     this._key = key
     this._value = value
     this._stockQuantity = stockQuantity
-    this._productAttributeId = productAttributeId
+    this._attributeId = attributeId
     this._stockId = stockId
   }
 
@@ -45,7 +45,7 @@ export class Attribute extends Entity {
     return this._stockId
   }
 
-  get productAttributeId(): string {
-    return this._productAttributeId
+  get attributeId(): string {
+    return this._attributeId
   }
 }

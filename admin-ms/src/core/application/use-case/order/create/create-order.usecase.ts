@@ -11,7 +11,7 @@ export class CreateOrderUseCase {
 
   async execute(input: InputCreateOrderDTO) {
     const order = OrderFactory.create(
-      input.clientId,
+      input.clientId ?? null,
       input.status,
       input.total,
       input.items

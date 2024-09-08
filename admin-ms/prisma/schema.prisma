@@ -127,8 +127,8 @@ model ProductStock {
 
 model Order {
   id       String      @id @default(uuid())
-  clientId String      @map("client_id")
-  client   Client      @relation(fields: [clientId], references: [id])
+  clientId String?     @map("client_id")
+  client   Client?     @relation(fields: [clientId], references: [id])
   status   String?
   total    Float
   items    OrderItem[]

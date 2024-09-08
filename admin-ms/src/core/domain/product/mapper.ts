@@ -20,7 +20,7 @@ export class ProductMapper {
       },
       attribute: entity.attributes.map((a) => ({
         id: a.id,
-        attributeId: a.productAttributeId,
+        attributeId: a.attributeId,
         key: a.key,
         value: a.value,
         stockQuantity: a.stockQuantity,

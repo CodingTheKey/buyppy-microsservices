@@ -10,7 +10,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       await tx.order.create({
         data: {
           id: entity.id,
-          clientId: entity.clientId,
+          clientId: entity.clientId ?? null,
           status: entity.status,
 
           items: {
@@ -110,7 +110,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       model.status,
       model.total,
       items,
-      model.client.name,
+      model.client?.name,
       model.refundReason,
       model.cancelReason,
     )
@@ -143,10 +143,12 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         o.status,
         o.total,
         items,
-        o.client.name,
+        o.client?.name,
         o.refundReason,
         o.cancelReason,
       )
+
+      order.setCreatedAt(o.createdAt)
 
       return order
     })

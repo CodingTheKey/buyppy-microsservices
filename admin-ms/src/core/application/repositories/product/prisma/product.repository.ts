@@ -117,7 +117,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 					cost: product.cost,
 					name: product.name,
 					price: product.price,
-					promotionalPrice: product.promotionalPrice,
+					promotionalPrice: product.promotionalPrice
 				},
 				where: {
 					id: product.id
@@ -130,6 +130,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 						id: a.id,
 					},
 					data: {
+						attributeId: a.attributeId,
 						value: a.value,
 					},
 				})
@@ -174,6 +175,8 @@ export class ProductRepository implements ProductRepositoryInterface {
 		if (!model) throw new Error("Product not found")
 
 		const category = new Category(model.Category?.id ?? '', model.Category?.title ?? '')
+
+		console.log(model.attributes)
 
 		const productAttributes = model.attributes.map((a) => new Attribute(
 			a.id,

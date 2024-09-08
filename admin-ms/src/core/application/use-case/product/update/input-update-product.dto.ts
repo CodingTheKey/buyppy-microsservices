@@ -15,5 +15,6 @@ export type Attribute = {
   key: string,
   value: string,
   stockQuantity: number,
-  stockId: string | null
+  stockId: string | null,
+  attributeId: string,
 }

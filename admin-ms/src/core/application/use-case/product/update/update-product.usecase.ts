@@ -21,7 +21,7 @@ export class UpdateProductUseCase {
       input.price ?? oldProduct.price,
       input.promotionalPrice ?? oldProduct.promotionalPrice,
       new Category(input.category.id ?? oldProduct.category.id, ''),
-      input.attributes.map((a) => new Attribute(a.id, a.key, a.value, a.stockQuantity, a.stockId))
+      input.attributes.map((a) => new Attribute(a.id, a.key, a.value, a.stockQuantity, a.attributeId, a.stockId))
     )
 
     await this.productRepository.update(product)

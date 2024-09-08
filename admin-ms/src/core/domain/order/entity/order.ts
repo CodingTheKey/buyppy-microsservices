@@ -3,17 +3,18 @@ import { OrderValidatorFactory } from "../factory/order-validator.factory"
 import { OrderItem } from "../value-objects/order-item"
 
 export class Order extends Entity {
-  private _clientId: string
+  private _clientId: string | null
   private _status: string | null
   private _total: number
   private _items: OrderItem[]
 	private _clientName: string | null
   private _refundReason: string | null
   private _canceleReason: string | null
+  private _createdAt: Date | null = null
 
   constructor(
     id: string,
-    clientId: string,
+    clientId: string | null,
     status: string | null,
     total: number,
     items: OrderItem[],
@@ -46,7 +47,11 @@ export class Order extends Entity {
     this._canceleReason = reason
   }
 
-  get clientId(): string {
+  setCreatedAt(createdAt: Date | null) {
+    this._createdAt = createdAt
+  }
+
+  get clientId(): string | null {
     return this._clientId;
   }
 
@@ -72,5 +77,9 @@ export class Order extends Entity {
 
   get canceleReason(): string | null {
     return this._canceleReason;
+  }
+
+  get createdAt(): Date | null {
+    return this._createdAt;
   }
 }
