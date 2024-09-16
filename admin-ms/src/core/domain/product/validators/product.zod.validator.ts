@@ -12,7 +12,7 @@ export class ProductZodValidator implements ValidatorInterface<Product> {
       code: z.string().min(1),
       cost: z.number().min(0),
       price: z.number().min(0),
-      promotionalPrice: z.number().min(0).optional(),
+      promotionalPrice: z.number().min(0).nullable().optional(),
       // categoryId: z.string().min(1)
     });
 

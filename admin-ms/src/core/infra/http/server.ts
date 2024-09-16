@@ -82,7 +82,7 @@ app.put("/client/:id", UpdateClientController.execute)
 app.post("/order/create", CreateOrderController.execute)
 app.get("/order/all", FetchAllOrderController.execute)
 app.get("/order/:id", FindOrderController.execute)
-app.patch("/order/cancel/:id", CancelOrderController.execute)
+app.put("/order/cancel/:id", CancelOrderController.execute)
 
 app.get("/attribute/all", FetchAllAttributesController.execute)
 app.post("/attribute/create", CreateAttributeController.execute)
