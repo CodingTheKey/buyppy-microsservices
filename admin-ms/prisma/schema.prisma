@@ -133,6 +133,9 @@ model Order {
   total    Float
   items    OrderItem[]
 
+  paymentMethod   String?
+  discountPercent Float?
+
   refundedAt   DateTime? @map("refunded_at")
   refundReason String?   @map("refund_reason")
 

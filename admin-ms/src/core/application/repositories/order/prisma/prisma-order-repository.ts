@@ -12,6 +12,8 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
           id: entity.id,
           clientId: entity.clientId ?? null,
           status: entity.status,
+          discountPercent: entity.discountPercent ?? null,
+          paymentMethod: entity.paymentMethod ?? null,
 
           items: {
             create: entity.items.map((i) => ({

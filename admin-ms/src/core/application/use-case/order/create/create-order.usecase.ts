@@ -14,7 +14,10 @@ export class CreateOrderUseCase {
       input.clientId ?? null,
       input.status,
       input.total,
-      input.items
+      input.items,
+
+      input.discountPercent,
+      input.paymentMethod,
     )
 
     await this.orderRepository.create(order)

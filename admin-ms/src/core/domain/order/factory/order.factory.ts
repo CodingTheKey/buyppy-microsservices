@@ -13,6 +13,8 @@ export class OrderFactory {
       price: number,
       productAttributeId: string,
     }>,
+    discountPercent: number | null,
+    paymentMethod: string | null
   ): Order {
     const orderId = uuid()
     const orderItems = items.map((i) => OrderItemFactory.create(
@@ -28,6 +30,13 @@ export class OrderFactory {
       status,
       total,
       orderItems,
+      "",
+
+      null,
+      null,
+
+      discountPercent,
+      paymentMethod
     )
   }
 }

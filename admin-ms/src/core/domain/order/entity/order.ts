@@ -8,6 +8,10 @@ export class Order extends Entity {
   private _total: number
   private _items: OrderItem[]
 	private _clientName: string | null
+
+  private _discountPercent: number | null
+  private _paymentMethod: string | null
+
   private _refundReason: string | null
   private _canceleReason: string | null
   private _createdAt: Date | null = null
@@ -24,6 +28,9 @@ export class Order extends Entity {
     refundReason: string | null = null,
 
     canceleReason: string | null = null,
+
+    discountPercent: number | null = null,
+    paymentMethod: string | null = null
   ) {
     super()
     this._id = id
@@ -36,6 +43,10 @@ export class Order extends Entity {
     this._refundReason = refundReason
 
     this._canceleReason = canceleReason
+
+    this._discountPercent = discountPercent
+    this._paymentMethod = paymentMethod
+
     this.validate()
   }
 
@@ -83,5 +94,13 @@ export class Order extends Entity {
 
   get createdAt(): Date | null {
     return this._createdAt;
+  }
+
+  get discountPercent(): number | null {
+    return this._discountPercent
+  }
+
+  get paymentMethod(): string | null {
+    return this._paymentMethod
   }
 }
