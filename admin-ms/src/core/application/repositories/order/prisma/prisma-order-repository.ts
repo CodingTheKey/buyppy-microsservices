@@ -115,6 +115,9 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
       model.client?.name,
       model.refundReason,
       model.cancelReason,
+
+      model.discountPercent,
+      model.paymentMethod
     )
 
     return order
@@ -148,6 +151,9 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
         o.client?.name,
         o.refundReason,
         o.cancelReason,
+
+        o.discountPercent,
+        o.paymentMethod
       )
 
       order.setCreatedAt(o.createdAt)

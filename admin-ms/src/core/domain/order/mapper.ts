@@ -10,19 +10,18 @@ export class OrderMapper {
       total: order.total,
       clientName: order.clientName,
 
+      discountPercent: order.discountPercent,
+      paymentMethod: order.paymentMethod,
+
       items: order.items.map(i => ({
         orderId: i.orderId,
         productId: i.productId,
         quantity: i.quantity,
         price: i.price,
-
-        createdAt: i.createdAt,
       })),
 
-      refundedAt: order.refundedAt,
       refundReason: order.refundReason,
 
-      canceledAt: order.canceledAt,
       canceleReason: order.canceleReason,
 
       createdAt: order.createdAt,
