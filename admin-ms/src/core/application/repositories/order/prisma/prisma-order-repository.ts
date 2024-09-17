@@ -93,7 +93,15 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
             name: true
           }
         },
-        items: true
+        items: {
+          include: {
+            product: {
+              select: {
+                name: true
+              }
+            }
+          }
+        }
       }
     })
 
@@ -101,6 +109,7 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
 
     const items = model?.items.map(i => new OrderItem(
       i.id,
+      i.product.name,
       i.orderId,
       i.productId,
       i.quantity,
@@ -130,13 +139,22 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
             name: true
           }
         },
-        items: true
+        items: {
+          include: {
+            product: {
+              select: {
+                name: true
+              }
+            }
+          }
+        }
       }
     })
 
     const orders = model.map((o) => {
       const items = o?.items.map(i => new OrderItem(
         i.id,
+        i.product.name,
         i.orderId,
         i.productId,
         i.quantity,

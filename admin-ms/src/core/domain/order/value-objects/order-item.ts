@@ -7,9 +7,11 @@ export class OrderItem extends Entity {
   private _quantity: number
   private _price: number
   private _productAttributeId: string | null
+  private _productName: string
 
   constructor(
     id: string,
+    productName: string,
     orderId: string,
     productId: string,
     quantity: number,
@@ -25,6 +27,8 @@ export class OrderItem extends Entity {
     this._price = price
 
     this._productAttributeId = productAttributeId
+
+    this._productName = productName
 
     this.validate()
   }
@@ -51,5 +55,9 @@ export class OrderItem extends Entity {
 
   get productAttributeId(): string | null {
     return this._productAttributeId;
+  }
+
+  get productName(): string {
+    return this._productName
   }
 }

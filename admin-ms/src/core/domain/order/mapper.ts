@@ -18,6 +18,7 @@ export class OrderMapper {
         productId: i.productId,
         quantity: i.quantity,
         price: i.price,
+        name: i.productName
       })),
 
       refundReason: order.refundReason,
