@@ -103,4 +103,8 @@ export class Order extends Entity {
   get paymentMethod(): string | null {
     return this._paymentMethod
   }
+
+  get canceledAt(): Date | null {
+    return this._createdAt
+  }
 }

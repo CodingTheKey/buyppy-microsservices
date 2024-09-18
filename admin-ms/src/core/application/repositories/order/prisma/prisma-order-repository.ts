@@ -61,22 +61,21 @@ export class PrismaOrderRepository implements OrderRepositoryInterface {
   }
   async update(entity: Order): Promise<void> {
     console.log(OrderMapper.execute(entity))
-    const order = OrderMapper.execute(entity)
+    // const order = OrderMapper.execute(entity)
     await prisma.order.update({
       where: {
         id: entity.id
       },
       data: {
-        id: order.id,
-        clientId: order.clientId,
-        status: order.status,
-        total: order.total,
+        id: entity.id,
+        clientId: entity.clientId,
+        status: entity.status,
+        total: entity.total,
 
-        refundedAt: order.refundedAt,
-        refundReason: order.refundReason,
+        refundReason: entity.refundReason,
 
-        canceledAt: order.canceledAt,
-        cancelReason: order.canceleReason,
+        canceledAt: entity.canceledAt,
+        cancelReason: entity.canceleReason,
 
         updatedAt: new Date(),
       }

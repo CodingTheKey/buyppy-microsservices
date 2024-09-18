@@ -11,6 +11,7 @@ export class OrderItemFactory {
   ): OrderItem {
     return new OrderItem(
       uuid(),
+      '',
       orderId,
       productId,
       quantity,
