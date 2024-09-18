@@ -6,6 +6,9 @@ import { OrderRepositoryInterface } from "../order-repository.interface";
 
 export class PrismaOrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
+    if (entity.paymentMethod === null || entity.paymentMethod === '')
+      throw new Error('Payment method or discount percent not found.');
+
     await prisma.$transaction(async (tx) => {
       await tx.order.create({
         data: {
