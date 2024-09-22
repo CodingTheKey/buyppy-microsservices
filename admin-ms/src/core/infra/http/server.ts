@@ -25,6 +25,7 @@ import { FetchProductByIdController } from "../../interfaces/controllers/product
 import { UpdateProductController } from "../../interfaces/controllers/products/update-product.controller";
 import { ClientRepositoryController } from "../../interfaces/controllers/report/client/client-report.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
+import { AuthMiddleware } from "../../interfaces/middlewares/auth.middleware";
 
 export const app = new Hono();
 
@@ -61,37 +62,37 @@ const fetchUsersController = new FetchByOrganizationController();
 
 app.post("/login", AuthController.execute);
 
-app.post("/client/create", registerUserController.register);
-app.get("/client/all", fetchUsersController.fetchByOrganization);
-app.get("/client/export", ExportClientsController.execute);
+app.post("/client/create", AuthMiddleware.execute, registerUserController.register);
+app.get("/client/all", AuthMiddleware.execute, fetchUsersController.fetchByOrganization);
+app.get("/client/export", AuthMiddleware.execute, ExportClientsController.execute);
 
-app.get("/product/all", FetchAllProductsController.fetchAll)
-app.post("/product/create", CreateProductWithAttributesController.execute)
-app.get("/product/export", ExportProductsController.execute);
-app.put("/product/:id", UpdateProductController.execute)
-app.delete("/product/:id", DeleteProductController.execute)
-app.get("/product/:id", FetchProductByIdController.execute)
+app.get("/product/all", AuthMiddleware.execute, FetchAllProductsController.fetchAll)
+app.post("/product/create", AuthMiddleware.execute, CreateProductWithAttributesController.execute)
+app.get("/product/export", AuthMiddleware.execute, ExportProductsController.execute);
+app.put("/product/:id", AuthMiddleware.execute, UpdateProductController.execute)
+app.delete("/product/:id", AuthMiddleware.execute, DeleteProductController.execute)
+app.get("/product/:id", AuthMiddleware.execute, FetchProductByIdController.execute)
 
-app.post("/client/create", registerUserController.register);
-app.get("/client/all", fetchUsersController.fetchByOrganization);
-app.get("/client/report", ClientRepositoryController.execute)
-app.get("/client/:id", FindClientByIdController.execute)
-app.delete("/client/:id", DeleteClientController.execute)
-app.put("/client/:id", UpdateClientController.execute)
+app.post("/client/create", AuthMiddleware.execute, registerUserController.register);
+app.get("/client/all", AuthMiddleware.execute, fetchUsersController.fetchByOrganization);
+app.get("/client/report", AuthMiddleware.execute, ClientRepositoryController.execute)
+app.get("/client/:id", AuthMiddleware.execute, FindClientByIdController.execute)
+app.delete("/client/:id", AuthMiddleware.execute, DeleteClientController.execute)
+app.put("/client/:id", AuthMiddleware.execute, UpdateClientController.execute)
 
-app.post("/order/create", CreateOrderController.execute)
-app.get("/order/all", FetchAllOrderController.execute)
-app.get("/order/:id", FindOrderController.execute)
-app.put("/order/cancel/:id", CancelOrderController.execute)
+app.post("/order/create", AuthMiddleware.execute, CreateOrderController.execute)
+app.get("/order/all", AuthMiddleware.execute, FetchAllOrderController.execute)
+app.get("/order/:id", AuthMiddleware.execute, FindOrderController.execute)
+app.put("/order/cancel/:id", AuthMiddleware.execute, CancelOrderController.execute)
 
-app.get("/attribute/all", FetchAllAttributesController.execute)
-app.post("/attribute/create", CreateAttributeController.execute)
-app.get("/attribute/:id", FindAttributeByIdController.execute)
+app.get("/attribute/all", AuthMiddleware.execute, FetchAllAttributesController.execute)
+app.post("/attribute/create", AuthMiddleware.execute, CreateAttributeController.execute)
+app.get("/attribute/:id", AuthMiddleware.execute, FindAttributeByIdController.execute)
 
-app.get("/category/all", FetchAllCategoriesController.execute)
-app.post("/category/create", CreateCategoryController.execute)
+app.get("/category/all", AuthMiddleware.execute, FetchAllCategoriesController.execute)
+app.post("/category/create", AuthMiddleware.execute, CreateCategoryController.execute)
 
-app.get("/category/:id", FindCategoryByIdController.execute)
+app.get("/category/:id", AuthMiddleware.execute, FindCategoryByIdController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");
