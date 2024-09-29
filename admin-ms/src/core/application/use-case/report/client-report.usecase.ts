@@ -13,7 +13,6 @@ export class ClientReportUseCase {
 
     if (period === 'daily') {
       const model = await this.clientRepository.countDailyCreated()
-      console.log(dayjs().daysInMonth())
       let formatted = []
       for (let day = 0; day <= dayjs('2019-08-25').daysInMonth() - 1; day++)
         formatted[day] = 0;
