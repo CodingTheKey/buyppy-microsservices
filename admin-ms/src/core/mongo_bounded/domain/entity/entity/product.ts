@@ -1,17 +1,16 @@
-import { ZodSchema } from "zod";
-import { Entity } from "../../../@shared/entity/entity-abstract";
+import { Entity as EntityAbstract } from "../../../@shared/entity/entity-abstract";
 import { ProductValidator } from "../validators/product.validator";
 
-export class Product extends Entity{
+export class Entity extends EntityAbstract {
   private _props: unknown
-  constructor(schema: ZodSchema, props: unknown) {
+  constructor(props: unknown) {
     super();
 
     this._props = props;
 
-    this._schema = schema;
+    // this._schema = schema;
 
-    this._props = this.validate()
+    // this._props = this.validate()
   }
 
   private validate() {

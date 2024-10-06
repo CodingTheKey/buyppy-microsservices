@@ -27,7 +27,7 @@ model Client {
   id        String  @id @default(uuid())
   document  String
   phone     String
-  email     String  @unique
+  email     String
   name      String
   addressId String  @unique @map("address_id")
   address   Address @relation(fields: [addressId], references: [id])

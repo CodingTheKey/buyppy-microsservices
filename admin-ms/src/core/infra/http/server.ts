@@ -26,6 +26,9 @@ import { UpdateProductController } from "../../interfaces/controllers/products/u
 import { ClientRepositoryController } from "../../interfaces/controllers/report/client/client-report.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
 import { AuthMiddleware } from "../../interfaces/middlewares/auth.middleware";
+import { CreateOrderNosqlController } from "../../mongo_bounded/controllers/orders/create-order.controller";
+import { FindAllOrdersMongoController } from "../../mongo_bounded/controllers/orders/find-all-order.controller";
+import { CreateProductsNosqlController } from "../../mongo_bounded/controllers/products/create-product.controller";
 import { FindAllProductsMongoController } from "../../mongo_bounded/controllers/products/find-all-products.controller";
 
 export const app = new Hono();
@@ -103,6 +106,10 @@ app.post("/category/create", AuthMiddleware.execute, CreateCategoryController.ex
 app.get("/category/:id", AuthMiddleware.execute, FindCategoryByIdController.execute)
 
 app.get("/playground/product/all", FindAllProductsMongoController.execute)
+app.post("/playground/product/create", CreateProductsNosqlController.execute)
+
+app.get("/playground/order/all", FindAllOrdersMongoController.execute)
+app.post("/playground/order/create", CreateOrderNosqlController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

@@ -1,36 +1,37 @@
-export const PRODUCT_REPOSITORY = 'PRODUCT_REPOSITORY';
 import { fql } from 'fauna';
 import { Attribute } from '../../../../domain/product/value-objects/attribute';
 import { Entity } from '../../../domain/entity/entity/product';
 import { fauna } from '../../../infra/db/fauna/fauna';
 import { RepositoryInterface } from '../../product-repository.interface';
 
-export class ProductRepository implements RepositoryInterface {
+export class OrderRepository implements RepositoryInterface {
 	async create(entity: Entity): Promise<void | Entity> {
-		console.log('product', JSON.stringify(entity.props))
+    // const schema = fql`
+		// 	let collection = Collection("schemas")
+		// 	collection.all()
+    // `
+		// return console.log(await fauna.query(schema))
 		const query = fql`
-			let collection = Collection("products")
-			collection.create(${entity.props as any})
+      let product = Collection("products").byId(${entity.props.productId})
+			Collection("orders").create({ productId: product, weight: 10, totalPrice: 10 })
 		`
 		await fauna.query(query)
 	}
+
 	async findAll(): Promise<Entity[]> {
 		const query = fql`
-			let collection = Collection("products")
+			let collection = Collection("orders")
 			collection.all()
 		`;
-		const productsModel = await fauna.query(query)
+		const ordersModel = await fauna.query(query)
 
-		if (productsModel.data.data.length === 0)
-			throw new Error('Products not found')
+		const orders: Entity[] = []
 
-		const products: Entity[] = []
-
-		productsModel.data.data.map((product: any) => {
-			products.push(new Entity(product))
+		ordersModel.data.data.map((product: any) => {
+			orders.push(new Entity(product))
 		})
 
-		return products
+		return orders
 	}
 
 	async createWithAttributes(product: Entity, attributes: Attribute[]): Promise<void> {

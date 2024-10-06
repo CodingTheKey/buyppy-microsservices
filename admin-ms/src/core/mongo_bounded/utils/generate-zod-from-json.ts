@@ -17,7 +17,7 @@ export class JsonToZodSchema {
     if (zodType) {
       shape[key] = zodType;
     } else {
-      shape[key] = z.any(); // Tipo padrão se o tipo não for reconhecido
+      shape[key] = z.any();
       console.warn(`Tipo não reconhecido para a chave "${key}": "${typeString}". Usando z.any().`);
     }
   }
