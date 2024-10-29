@@ -20,6 +20,15 @@ DATABASE_URL = "postgresql://buyppy-db_owner:aiykWGY4Df3b@ep-withered-term-a53vl
 DIRECT_URL = "postgresql://buyppy_db_user:NvFygzwAtfbUcrMqfw9voWaKTM2YENuh@dpg-cr4d1kogph6c73a79ttg-a.ohio-postgres.render.com/buyppy_db"
 JWT_SECRET = "123#321"
 
+[env.prod.vars]
+DATABASE_URL = "postgresql://buyppy-db_owner:aiykWGY4Df3b@ep-withered-term-a53vlnyx.us-east-2.aws.neon.tech/buyppy-db?sslmode=require"
+DIRECT_URL = "postgresql://buyppy_db_user:NvFygzwAtfbUcrMqfw9voWaKTM2YENuh@dpg-cr4d1kogph6c73a79ttg-a.ohio-postgres.render.com/buyppy_db"
+JWT_SECRET = "123#321"
+
+[env.stg.vars]
+DATABASE_URL = "postgresql://buyppy-db_owner:aiykWGY4Df3b@ep-withered-term-a53vlnyx.us-east-2.aws.neon.tech/buyppy-db?sslmode=require"
+DIRECT_URL = "postgresql://buyppy_db_user:NvFygzwAtfbUcrMqfw9voWaKTM2YENuh@dpg-cr4d1kogph6c73a79ttg-a.ohio-postgres.render.com/buyppy_db"
+JWT_SECRET = "123#321"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
