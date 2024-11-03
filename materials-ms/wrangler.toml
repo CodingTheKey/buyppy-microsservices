@@ -13,24 +13,27 @@ name = "buyppy-material-ms-stg"
 name = "buyppy-material-ms-prod"
 
 [vars]
-DATABASE_URL = ""
-DIRECT_URL = ""
 JWT_SECRET = "123#321"
 
 [env.dev.vars]
-DATABASE_URL = ""
-DIRECT_URL = ""
 JWT_SECRET = "123#321"
 
 [env.prod.vars]
-DATABASE_URL = ""
-DIRECT_URL = ""
 JWT_SECRET = "123#321"
 
 [env.stg.vars]
-DATABASE_URL = ""
-DIRECT_URL = ""
 JWT_SECRET = "123#321"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "buyppy-db-reciclagem"
+database_id = "8d4499eb-fd72-4206-914d-5c5723b3e247"
+migrations_dir = "drizzle"
+preview_database_id = "DB"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
 
 # [vars]
 # MY_VAR = "my-variable"

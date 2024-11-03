@@ -1,7 +1,7 @@
 import { RecordFactory } from "../../../domain/record/factories/create-record.factory";
-import { RecordRepositoryInterface } from "../../../repositories/record/record-repository.interface";
+import type { RecordRepositoryInterface } from "../../../repositories/record/record-repository.interface";
 import { RecordMapper } from "../mappers/mapper";
-import { InputCreateRecordDto } from "./input-create-record.dto";
+import type { InputCreateRecordDto } from "./input-create-record.dto";
 
 export class CreateRecordUseCase {
   private readonly recordRepository: RecordRepositoryInterface
@@ -12,8 +12,8 @@ export class CreateRecordUseCase {
   }
   async execute(input: InputCreateRecordDto) {
     const record = RecordFactory.create(
-      input.name,
       input.weight,
+      input.materialId,
     )
     await this.recordRepository.create(record)
 

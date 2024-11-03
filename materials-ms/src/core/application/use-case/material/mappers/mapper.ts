@@ -1,5 +1,6 @@
-import { Material } from "../../../domain/material/entity/material";
+import type { Material } from "../../../domain/material/entity/material";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class MaterialMapper {
   static execute(m: Material) {
     return {

@@ -1,8 +1,9 @@
 import * as jwt from "@tsndr/cloudflare-worker-jwt"
-import { Context, Next } from "hono"
+import type { Context, Next } from "hono"
 import { HTTPException } from "hono/http-exception"
 import { HTTPExceptionHandler } from "../../../../decorators/http-exceptions-handler.decorator"
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AuthMiddleware {
 	@HTTPExceptionHandler('Error in authentication')
 	static async execute(c: Context, next: Next) {

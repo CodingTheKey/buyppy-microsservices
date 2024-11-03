@@ -1,4 +1,4 @@
-import { MaterialsRepositoryInterface } from "../../../repositories/material/materials-repository.interface"
+import type { MaterialsRepositoryInterface } from "../../../repositories/material/materials-repository.interface"
 import { MaterialMapper } from "../mappers/mapper"
 
 export class FetchAllMaterialsUseCase {
