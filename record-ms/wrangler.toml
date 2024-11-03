@@ -1,0 +1,59 @@
+name = "recordss-ms"
+main = "src/index.ts"
+compatibility_date = "2024-10-22"
+compatibility_flags = ["nodejs_compat"]
+
+[env.dev]
+name = "buyppy-records-ms-dev"
+
+[env.stg]
+name = "buyppy-records-ms-stg"
+
+[env.prod]
+name = "buyppy-records-ms-prod"
+
+[vars]
+JWT_SECRET = "123#321"
+
+[env.dev.vars]
+JWT_SECRET = "123#321"
+
+[env.prod.vars]
+JWT_SECRET = "123#321"
+
+[env.stg.vars]
+JWT_SECRET = "123#321"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "buyppy-db-reciclagem"
+database_id = "8d4499eb-fd72-4206-914d-5c5723b3e247"
+migrations_dir = "drizzle"
+preview_database_id = "DB"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
+
+# [observability]
+# enabled = true
+# head_sampling_rate = 1
