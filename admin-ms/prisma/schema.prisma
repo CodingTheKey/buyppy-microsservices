@@ -4,6 +4,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
+  // url       = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
   url       = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiODQ2ZTdmZWMtMTRiMi00NmFlLWJhNmYtZDdiMTg1NGU3YTcwIiwidGVuYW50X2lkIjoiOWQ5MDM4NTAwMTU2YjY0YWU0YWQxZDYwMjhjYzE2ZjkzNmEwOWJhZGVkMWUyMjA1Y2FkMGVjZDkyMTFjOWI5MCIsImludGVybmFsX3NlY3JldCI6ImNhY2E0NjE3LTQ2YjItNGI1ZS1iNDI2LThjOGRhNTQ2NzZhYSJ9.XFKfH9Of3cWBKoJapJ86ekdTEep3mM77vi8o5wt4sK4"
   directUrl = "postgresql://buyppy_db_user:NvFygzwAtfbUcrMqfw9voWaKTM2YENuh@dpg-cr4d1kogph6c73a79ttg-a.ohio-postgres.render.com/buyppy_db"
 }
@@ -25,7 +27,7 @@ model Client {
   id        String  @id @default(uuid())
   document  String
   phone     String
-  email     String  @unique
+  email     String
   name      String
   addressId String  @unique @map("address_id")
   address   Address @relation(fields: [addressId], references: [id])

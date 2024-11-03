@@ -16,9 +16,9 @@ export class Logger {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
           source: this.sourceId,
-          log_entry: JSON.stringify(logData),
+          log_entry: logData,
         }),
       });
 

@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Context, Hono } from "hono";
 import { cors } from "hono/cors";
 import { Logger } from "../../../utils/logger.util";
 import { CreateAttributeController } from "../../interfaces/controllers/attributes/create-attribute.controller";
@@ -26,6 +26,10 @@ import { UpdateProductController } from "../../interfaces/controllers/products/u
 import { ClientRepositoryController } from "../../interfaces/controllers/report/client/client-report.controller";
 import { FetchByOrganizationController } from "../../interfaces/controllers/user/fetch-by-organization.controller";
 import { AuthMiddleware } from "../../interfaces/middlewares/auth.middleware";
+import { CreateOrderNosqlController } from "../../mongo_bounded/controllers/orders/create-order.controller";
+import { FindAllOrdersMongoController } from "../../mongo_bounded/controllers/orders/find-all-order.controller";
+import { CreateProductsNosqlController } from "../../mongo_bounded/controllers/products/create-product.controller";
+import { FindAllProductsMongoController } from "../../mongo_bounded/controllers/products/find-all-products.controller";
 
 export const app = new Hono();
 
@@ -40,7 +44,7 @@ app.use(
 
 const logflareClient = new Logger('5i4Oqb0QQHJ_', '3a0309a4-a418-4d2d-bd38-ee39387ff91f');
 
-app.use('*', async (ctx, next) => {
+app.use('*', async (ctx: Context, next) => {
   const startTime = Date.now();
 
   await next();
@@ -52,6 +56,13 @@ app.use('*', async (ctx, next) => {
     status: ctx.res.status,
     duration,
     headers: ctx.header,
+    query: ctx.req.query,
+
+    request: ctx.req.method === 'GET' ? {} : await ctx.req.json(),
+    // response: await ctx.res.json(),
+
+    userAgent: JSON.stringify(ctx.req.header('User-Agent')),
+    remoteAddress: ctx.req.header('X-Forwarded-For') || ctx.req.header('X-Real-IP'),
   };
 
   await logflareClient.sendLog(ctx, logData);
@@ -93,6 +104,12 @@ app.get("/category/all", AuthMiddleware.execute, FetchAllCategoriesController.ex
 app.post("/category/create", AuthMiddleware.execute, CreateCategoryController.execute)
 
 app.get("/category/:id", AuthMiddleware.execute, FindCategoryByIdController.execute)
+
+app.get("/playground/product/all", FindAllProductsMongoController.execute)
+app.post("/playground/product/create", CreateProductsNosqlController.execute)
+
+app.get("/playground/order/all", FindAllOrdersMongoController.execute)
+app.post("/playground/order/create", CreateOrderNosqlController.execute)
 
 app.get("/", (c) => {
 	return c.text("Hello Hono!");

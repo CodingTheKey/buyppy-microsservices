@@ -1,0 +1,5 @@
+{
+  "out": "./drizzle",
+  "schema": "./src/core/infra/db/drizzle/**/*.ts",
+  "dialect": "sqlite"
+}
