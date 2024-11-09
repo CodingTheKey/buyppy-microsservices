@@ -8,6 +8,34 @@
       "when": 1730573242053,
       "tag": "0000_lowly_angel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1730866547550,
+      "tag": "0001_bumpy_fixer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1731076462923,
+      "tag": "0002_brown_zuras",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1731078214620,
+      "tag": "0003_lazy_valkyrie",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1731081408016,
+      "tag": "0004_light_riptide",
+      "breakpoints": true
     }
   ]
 }

@@ -13,8 +13,9 @@ export class CreateRecordUseCase {
   async execute(input: InputCreateRecordDto) {
     const record = RecordFactory.create(
       input.weight,
-      input.materialId,
+      input.materialsIds,
     )
+
     await this.recordRepository.create(record)
 
     const output = RecordMapper.execute(record)

@@ -1,4 +1,4 @@
 export interface InputCreateRecordDto {
-  materialId: string;
+  materialsIds: string[];
   weight: string;
 }

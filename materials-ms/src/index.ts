@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { connect } from './core/infra/db/drizzle/drizzle'
 import { CreateMaterialController } from './core/interfaces/controllers/attributes/create-material.controller'
 import { FetchAllMaterialsController } from './core/interfaces/controllers/attributes/fetch-all-material.controller'
@@ -14,6 +15,15 @@ type Env = {
 
 const app = new Hono()
 
+app.use(
+  '*',
+  cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
@@ -26,9 +36,37 @@ app.get("/record/all", AuthMiddleware.execute, FetchAllRecordController.execute)
 app.post("/record/create", AuthMiddleware.execute, CreateRecordController.execute)
 app.get("/record/:id", AuthMiddleware.execute, FindRecordByIdController.execute)
 
+async function sendLog(logData: any): Promise<void> {
+  try {
+    const response = await fetch('https://api.logflare.app/logs/json?source=3a0309a4-a418-4d2d-bd38-ee39387ff91f', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-KEY': '5i4Oqb0QQHJ_'
+      },
+      body: JSON.stringify({ 
+        log_entry: logData,
+      }),
+    });
+
+    console.log(response)
+
+    if (!response.ok) {
+      console.error(`Failed to send log to Logflare: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error('Failed to send log to Logflare:', error);
+  }
+}
+
+
 export default {
   ...app,
   fetch: async (request: Request, c: Env) => {
+    sendLog({
+      request,
+      c
+    })
     connect(c.DB)
     return app.fetch(request, c)
   },

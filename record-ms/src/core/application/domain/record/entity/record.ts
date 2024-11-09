@@ -2,24 +2,28 @@ import { Entity } from "../../../../../@shared/entity/entity-abstract";
 
 export class Record extends Entity {
   private _weight: string;
-  private _materialId: string;
+  private _materialsIds: string[];
 
   constructor(
     id: string,
     weight: string,
-    materialId: string,
+    materialsIds: string[],
   ) {
     super();
     this._id = id;
     this._weight = weight;
-    this._materialId = materialId;
+    this._materialsIds = materialsIds;
   }
 
   get weight(): string {
     return this._weight;
   }
 
-  get materialId(): string {
-    return this._materialId;
+  get materialsIds(): string[] {
+    return this._materialsIds;
+  }
+
+  setWeight(weight: string): void {
+    this._weight = weight;
   }
 }

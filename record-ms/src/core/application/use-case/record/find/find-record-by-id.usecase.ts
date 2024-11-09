@@ -1,5 +1,5 @@
 import { RecordRepositoryInterface } from "../../../repositories/record/record-repository.interface";
-import { RecordMapper } from "../mappers/mapper";
+import { RecordMaterialsMapper } from "../mappers/mapper";
 
 export class FindRecordByIdUseCase {
   private readonly recordRepository: RecordRepositoryInterface
@@ -12,6 +12,6 @@ export class FindRecordByIdUseCase {
   async execute(id: string) {
     const record = await this.recordRepository.find(id)
 
-    return RecordMapper.execute(record)
+    return RecordMaterialsMapper.execute(record)
   }
 }

@@ -1,0 +1,1 @@
+ALTER TABLE `materials_records` ADD `materialName` text DEFAULT '' NOT NULL;

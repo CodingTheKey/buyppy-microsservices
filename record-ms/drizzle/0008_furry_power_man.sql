@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS `materials_price_unique`;

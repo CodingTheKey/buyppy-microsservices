@@ -4,7 +4,7 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
     "db:generate": "drizzle-kit generate",
-    "db:up": "drizzle-kit up:sqlite"
+    "db:up": "drizzle-kit up"
   },
   "dependencies": {
     "@tsndr/cloudflare-worker-jwt": "^3.1.3",

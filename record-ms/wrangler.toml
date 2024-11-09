@@ -1,16 +1,16 @@
-name = "recordss-ms"
+name = "buyppy-reciclagem-ms-prod"
 main = "src/index.ts"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
 
 [env.dev]
-name = "buyppy-records-ms-dev"
+name = "buyppy-reciclagem-ms-dev"
 
 [env.stg]
-name = "buyppy-records-ms-stg"
+name = "buyppy-reciclagem-ms-stg"
 
 [env.prod]
-name = "buyppy-records-ms-prod"
+name = "buyppy-reciclagem-ms-prod"
 
 [vars]
 JWT_SECRET = "123#321"

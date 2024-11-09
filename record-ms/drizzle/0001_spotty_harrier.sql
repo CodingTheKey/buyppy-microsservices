@@ -1,1 +1,0 @@
-DROP INDEX IF EXISTS `records_materialId_unique`;

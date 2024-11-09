@@ -5,12 +5,12 @@ import { Record } from "../entity/record";
 export class RecordFactory {
   static create(
     weight: string,
-    materialId: string,
+    materialsIds: string[],
   ): Record {
     return new Record(
       uuid(),
       weight,
-      materialId,
+      materialsIds,
     )
   }
 }

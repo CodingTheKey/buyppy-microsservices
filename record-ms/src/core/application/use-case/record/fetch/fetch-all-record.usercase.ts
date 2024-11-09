@@ -1,5 +1,5 @@
-import { RecordRepositoryInterface } from "../../../repositories/record/record-repository.interface"
-import { RecordMapper } from "../mappers/mapper"
+import type { RecordRepositoryInterface } from "../../../repositories/record/record-repository.interface"
+import { RecordMaterialsMapper } from "../mappers/mapper"
 
 export class FetchAllRecordUseCase {
   private readonly recordRepository: RecordRepositoryInterface
@@ -13,7 +13,7 @@ export class FetchAllRecordUseCase {
   async execute() {
     const raw = await this.recordRepository.findAll()
 
-    const materials = raw.map((m) => RecordMapper.execute(m))
+    const materials = raw.map((m) => RecordMaterialsMapper.execute(m))
 
     return materials
   }

@@ -1,8 +1,9 @@
-import { Context } from "hono";
+import type { Context } from "hono";
 import { HTTPExceptionHandler } from "../../../../../decorators/http-exceptions-handler.decorator";
 import { RecordRepository } from "../../../application/repositories/record/drizzle/record.repository";
 import { FetchAllRecordUseCase } from "../../../application/use-case/record/fetch/fetch-all-record.usercase";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class FetchAllRecordController {
   @HTTPExceptionHandler()
   static async execute(c: Context) {

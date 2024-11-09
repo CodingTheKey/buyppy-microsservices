@@ -12,8 +12,64 @@
     {
       "idx": 1,
       "version": "6",
-      "when": 1730604830911,
-      "tag": "0001_spotty_harrier",
+      "when": 1730866547550,
+      "tag": "0001_bumpy_fixer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1731076462923,
+      "tag": "0002_brown_zuras",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1731078214620,
+      "tag": "0003_lazy_valkyrie",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1731081408016,
+      "tag": "0004_light_riptide",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1731097762648,
+      "tag": "0005_shiny_archangel",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1731097986503,
+      "tag": "0006_smart_ronan",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1731103777859,
+      "tag": "0007_sweet_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1731106042511,
+      "tag": "0008_furry_power_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1731112687904,
+      "tag": "0009_low_cannonball",
       "breakpoints": true
     }
   ]
